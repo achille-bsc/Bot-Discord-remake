@@ -35,4 +35,4 @@ mongoose.connect(process.env.DATABASE_URI, {
 })
 .catch (err => { console.log(`${err}`.bold.red) })
 
-client.login(process.env.TEST);
+client.login(process.env.TOKEN);
