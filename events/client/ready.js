@@ -17,3 +17,5 @@ module.exports = {
 		client.application.commands.set(client.commands.map(cmd => cmd));
 	},
 };
+
+// Stage Changes
