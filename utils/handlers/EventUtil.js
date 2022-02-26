@@ -8,7 +8,7 @@ module.exports = async (client) => {
 	(await pGlob(`${process.cwd()}/events/*/*.js`)).map(async eventFile => {
 		const event = require(eventFile);
 
-		if(!eventList.includes(event.name) || !event.name) return table.addRow(`\n-----\nEvenement non-déclanché: erreur de typo (ou pas de nom)\nFichier => ${eventFile}\n-----\n`, 'Non-CHargé');
+		if(!eventList.includes(event.name) || !event.name) return table.addRow(`Evenement non-déclanché: erreur de typo (ou pas de nom) - Fichier => ${eventFile}`, 'Non-CHargé');
 
 
 		if (event.once) {
@@ -17,7 +17,7 @@ module.exports = async (client) => {
 		else {
 			client.on(event.name, (...args) => event.execute(client, ...args));
 		}
-		table.addRow(event.name, 'Prêt');
+		table.addRow(event.name, 'Chargé');
 	});
 	console.log(table.toString().bold.cyan);
 	console.log(`\n`)

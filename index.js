@@ -22,17 +22,17 @@ mongoose.connect(process.env.DATABASE_URI, {
 	socketTimeoutMS: 45000,
 	family: 4
 }).then (() => { 
-	console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓'.bold.magenta);
-	console.log('┃                                                      ┃'.bold.magenta);
-	console.log('┃     Le client est connecté à la base de donnée !     ┃'.bold.magenta);
-	console.log('┃                                                      ┃'.bold.magenta);
-	console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.bold.magenta);
-	console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓'.bold.yellow);
-	console.log('┃                                ┃'.bold.yellow);
-	console.log('┃     Chargement en Cours...     ┃'.bold.yellow);
-	console.log('┃                                ┃'.bold.yellow);
-	console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.bold.yellow);
+	console.log(`┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                                                      ┃
+┃     Le client est connecté à la base de donnée !     ┃
+┃                                                      ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n`.bold.magenta);
+	console.log(`┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃                                ┃
+┃     Chargement en Cours...     ┃
+┃                                ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n`.bold.yellow);
 })
 .catch (err => { console.log(`${err}`.bold.red) })
 
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN)
