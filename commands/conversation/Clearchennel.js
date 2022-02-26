@@ -3,7 +3,7 @@ const { MessageEmbed, Permissions } = require('discord.js')
 module.exports = {
 	name: 'clearchannel',
 	description: 'Permet de vider un salon',
-	run: async (client, message, args) => {
+	async run (client, message, args) {
 		if (!message.author.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return message.reply({ content: 'Vous n\'avez pas la permission d\'utiliser cette commande.' });
 		await message.channel.delete().then(async channel => {
 			channel.clone(this.name).then(async chann => {

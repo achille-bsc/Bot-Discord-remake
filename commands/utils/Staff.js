@@ -4,7 +4,7 @@ const { MessageEmbed } = require('discord.js')
 module.exports = {
 	name: 'staff',
 	description: 'Donne la liste des membres du staff du bot ainsi que leurs rôles',
-	run: (client, message, args) => {
+	run (client, message, args) {
 		const embed = new MessageEmbed()
 			.setColor('#4ed5f8')
 			.setTitle('Membre Support du BOT')
@@ -20,7 +20,7 @@ module.exports = {
 
 		message.channel.send({ embeds: [embed] });
 	},
-	runSlash: (client, interaction) => {
+	runSlash (client, interaction) {
 		const embed = new MessageEmbed()
 			.setColor('#4ed5f8')
 			.setTitle('Membre Support du BOT')
