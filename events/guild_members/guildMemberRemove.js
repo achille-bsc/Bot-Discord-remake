@@ -6,7 +6,6 @@ module.exports = {
 	name: 'guildMemberRemove',
 	once: false,
 	async execute(client, member) {
-		return;
 		const creationTimestamp = Formatters.time(dayjs(member.user.createdTimestamp).unix(), Formatters.TimestampStyles.ShortDateTime);
 		const relativeCreationTimestamp = Formatters.time(dayjs(member.user.createdTimestamp).unix(), Formatters.TimestampStyles.RelativeTime);
 		const joinTimestamp = Formatters.time(dayjs(member.joinedTimestamp).unix(), Formatters.TimestampStyles.ShortDateTime);
@@ -18,13 +17,13 @@ module.exports = {
 			.setAuthor({ name: `${member.user.tag} (${member.id})`, iconURL: member.user.displayAvatarURL() })
 			.setColor('RED')
 			.setDescription(`± Nom d'utilisateur: ${member.displayName}
-			± Créé le: ${creationTimestamp} (${relativeCreationTimestamp})
-			± Rejoint le: ${joinTimestamp} (${relativeJoinTimestamp})
-			± Quitté le: ${leftTimestamp} (${relativeLeftTimestamp})`)
+			± Créé le: <t:${parseInt(member.user.createdTimestamp / 1000 )}:f> (<t:${parseInt(member.user.createdTimestamp / 1000)}:R>)
+			± Rejoint le: <t:${parseInt(member.joinedTimestamp / 1000 )}:f> (<t:${parseInt(member.joinedTimestamp / 1000 )}:R>)
+			± Quitté le: <t:${parseInt(Date.now() / 1000 )}:f> (<t:${parseInt(Date.now() / 1000 )}:R>)`)
 			.setTimestamp()
 			.setFooter({ text: `L'utilisateur à quitté !` })
 
-		const logChannel = client.channels.cache.get('841827877137940510');
+		const logChannel = client.channels.cache.get('946528565271330886');
 
 		logChannel.send({ embeds: [embed] })
 	},
