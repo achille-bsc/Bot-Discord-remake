@@ -24,7 +24,7 @@ module.exports = {
 			});
 		});
 	},
-	runSlash: async (client, interaction) => {
+	async runInteraction (client, interaction) {
 		await interaction.channel.delete().then(async channel => {
 			if (!interaction.user.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return interaction.reply({ content: 'Vous n\'avez pas la permission d\'utiliser cette commande.', ephemeral: true });
 			channel.clone(this.name).then(async chann => {

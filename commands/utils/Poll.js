@@ -73,7 +73,7 @@ module.exports = {
 			],
 		},
 	],
-	async runSlash (client, interaction) {
+	async runInteraction (client, interaction) {
 		const pollTitle = interaction.options.getString('titre');
 		const pollContent = interaction.options.getString('contenu');
 		const color = interaction.options.getString('couleur') || '#4ed5f8'

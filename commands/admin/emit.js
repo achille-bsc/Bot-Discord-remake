@@ -5,7 +5,7 @@ const guildMemberAdd = require('../../events/guild_members/guildMemberAdd');
 module.exports = {
 	name: 'emit',
 	description: 'Emettre un évènement au choix',
-	run (client, message, args) {
+	async run (client, message, args) {
 		if (!msg.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) return message.channel.reply(`Vous n'avez pas la permission d'utiliser cette commande`)
 		if (!args[0] || !args[0].match(/^(guildMemberAdd|guildMemberRemove|guildCreate)$/)) return message.reply({ content: `Merci d'entrer un évènement valide (\`guildMemberAdd\`, \`guildMemberRemove\`)` });
 
@@ -42,8 +42,8 @@ module.exports = {
 			],
 		}
 	],
-	runSlash (client, interaction) {
-		if (!msg.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) return interaction.reply({content:`Vous n'avez pas la permission d'utiliser cette commande`, ephemeral: true})
+	async runInteraction (client, interaction) {
+		if (!interaction.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)) return interaction.reply({content:`Vous n'avez pas la permission d'utiliser cette commande`, ephemeral: true})
 		
 		const evtChoices = interaction.options.getString('event');
 
