@@ -8,7 +8,7 @@ module.exports = async (client) => {
 	(await pGlob(`${process.cwd()}/commands/*/*.js`)).map(async cmdFile => {
 		const cmd = require(cmdFile);
 
-		if (!cmd.name || !cmd.description) return table.addRow(`${cmd.name || cmdFile}`, 'Non-Chargée');
+		if (!cmd.name || (!cmd.description && cmd.type != 'USER')) return table.addRow(`${cmd.name || cmdFile}`, 'Non-Chargée');
 		client.commands.set(cmd.name, cmd);
 		table.addRow(cmd.name, 'Chargé');
 
