@@ -5,15 +5,22 @@ const { Client, Collection } = require('discord.js');
 const dotenv = require('dotenv'); dotenv.config();
 const mongoose = require('mongoose')
 const client = new Client({ intents: 515 });
+const Logger = require('./utils/logger')
 
 client.commands = new Collection();
 
 ['EventUtil', 'CommandUtil'].forEach(handler => { require(`./utils/handlers/${handler}`)(client); });
 
-process.on('exit', code => { console.log(`Le precessus s'est arrêté avec le code ${code} !`) })
-process.on('uncaughtException', (err, origin) => { console.log(`UNCAUGHT_EXCEPTION: ${err}`, `Origine: ${origin}`) })
-process.on('unhandledRejection', (reason, promise) => { console.log(`UNHANDLED_REJECTION: ${reason}\n-----\n`, promise ) })
-process.on('warning', (...args) => { console.log(...args) })
+process.on('exit', code => { Logger.client(`Le precessus s'est arrêté avec le code ${code} !`) })
+process.on('uncaughtException', (err, origin) => { 
+	Logger.error(`UNCAUGHT_EXCEPTION: ${err}`)
+	console.error(`Origine: ${origin}`)
+});
+process.on('unhandledRejection', (reason, promise) => {
+	Logger.warn(`UNHANDLED_REJECTION: ${reason}` )
+	console.log(promise)
+});
+process.on('warning', (...args) => { Logger.warn(...args) })
 
 mongoose.connect(process.env.DATABASE_URI, {
 	autoIndex: false, 
@@ -35,4 +42,4 @@ mongoose.connect(process.env.DATABASE_URI, {
 })
 .catch (err => { console.log(`${err}`.bold.red) })
 
-client.login(process.env.TOKEN)
+client.login(process.env.TEST)

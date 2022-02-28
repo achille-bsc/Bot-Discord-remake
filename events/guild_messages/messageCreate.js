@@ -1,4 +1,5 @@
 const prefix = '!';
+const ownerid = '688098375697956905';
 
 module.exports = {
 	name: 'messageCreate',
@@ -12,6 +13,14 @@ module.exports = {
 		if (cmdName.length == 0) return;
 
 		const cmd = client.commands.get(cmdName);
+		if (!cmd) return;
+
+		if(cmd.ownerOnly) {
+			if(message.author.id != ownerid) return message.reply('Seuls les Administrateurs du bot peuvent utiliser cette commande')
+		}
+
+		if (!message.member.permissions.has([cmd.permissions])) return message.reply(`Vous n'avez pas la/les permission(s) requise(s) (\`${cmd.permissions.join(', ')}\`) pour tapper cette commande`);
+
 		if (cmd) {
 			cmd.run(client, message, args);
 		}

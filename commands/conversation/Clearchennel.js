@@ -3,8 +3,12 @@ const { MessageEmbed, Permissions } = require('discord.js')
 module.exports = {
 	name: 'clearchannel',
 	description: 'Permet de vider un salon',
+    permissions: ['SEND_MESSAGES', 'MANAGE_MESSAGES', 'MANAGE_CHANNELS'],
+	ownerOnly: false,
+	usage: 'clearchannel',
+	examples: ['clearchannel'],
+	category: 'conversation',
 	async run (client, message, args) {
-		if (!message.author.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return message.reply({ content: 'Vous n\'avez pas la permission d\'utiliser cette commande.' });
 		await message.channel.delete().then(async channel => {
 			channel.clone(this.name).then(async chann => {
 				chann.send( { embeds: [new MessageEmbed()
@@ -26,7 +30,6 @@ module.exports = {
 	},
 	async runInteraction (client, interaction) {
 		await interaction.channel.delete().then(async channel => {
-			if (!interaction.user.permissions.has(Permissions.FLAGS.MANAGE_CHANNELS)) return interaction.reply({ content: 'Vous n\'avez pas la permission d\'utiliser cette commande.', ephemeral: true });
 			channel.clone(this.name).then(async chann => {
 				chann.send( { embeds: [new MessageEmbed()
 					.setColor('#4ed5f8')

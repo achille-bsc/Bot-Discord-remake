@@ -2,7 +2,12 @@ const { MessageEmbed, Message, MessageActionRow, MessageButton } = require('disc
 
 module.exports = {
 	name: 'clear',
-	description: 'Permet de supprimer des messages',
+	description: 'Permet de supprimer entre 1 et 99 messages inclus',
+    permissions: ['SEND_MESSAGES', 'MANAGE_MESSAGES'],
+	ownerOnly: false,
+	usage: 'clear [nombre]',
+	examples: ['clear 1', 'clear 99', 'clear 5'],
+	category: 'conversation',
 	async run (client, message, args) {
 		return;
 	},

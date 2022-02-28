@@ -3,6 +3,11 @@ const { MessageEmbed, Message, MessageActionRow, MessageButton } = require('disc
 module.exports = {
 	name: 'invite',
 	description: 'Donne le lien d\'invitation du bot',
+	permissions: ['SEND_MESSAGES'],
+	ownerOnly: false,
+	usage: 'invite',
+	examples: ['invite'],
+	category: 'utile',
 	async run (client, message, args) {
 
 		const embed = new MessageEmbed()

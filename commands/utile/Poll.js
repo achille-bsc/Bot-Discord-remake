@@ -5,6 +5,11 @@ const guildMemberAdd = require('../../events/guild_members/guildMemberAdd');
 module.exports = {
 	name: 'poll',
 	description: 'Postez Votre propre sondage',
+	permissions: ['SEND_MESSAGES', 'MANAGE_MESSAGES'],
+	ownerOnly: false,
+	usage: 'poll [question]',
+	examples: ['poll [Aimez-vous les pattes ?]'],
+	category: 'utile',
 	async run (client, message, args) {
 		if (!args[0] || !args[0].match(/^(guildMemberAdd|guildMemberRemove)$/)) return message.reply({ content: `Merci d'entrer une question pour votre sondage !` });
 

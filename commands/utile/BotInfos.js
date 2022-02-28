@@ -4,6 +4,11 @@ const package = require('../../package.json')
 module.exports = {
 	name: 'botinfo',
 	description: 'Donne des informations relatives au bot',
+	permissions: ['SEND_MESSAGES'],
+	ownerOnly: false,
+	usage: 'botinfos',
+	examples: ['botinfo'],
+	category: 'utile',
 	async run (client, message, args) {
 		let guilds = 0
 		let members = 0

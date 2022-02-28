@@ -1,4 +1,5 @@
 const colors = require('colors');
+
 module.exports = {
 	name: 'ready',
 	once: true,
@@ -10,10 +11,10 @@ module.exports = {
 		console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.bold.green);
 
 		// Instantané
-		/* const devGuild = await client.guilds.cache.get('841813630172790834');
-		devGuild.commands.set(client.commands.map(cmd => cmd)); */
+		const devGuild = await client.guilds.cache.get('841813630172790834');
+		devGuild.commands.set(client.commands.map(cmd => cmd));
 		
 		// Global => 1H minimum
-		client.application.commands.set(client.commands.map(cmd => cmd));
+		//client.application.commands.set(client.commands.map(cmd => cmd));
 	},
 };

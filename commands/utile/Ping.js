@@ -2,7 +2,12 @@ const { MessageEmbed } = require('discord.js')
 
 module.exports = {
 	name: 'ping',
-	description: 'Donne la latence du bot ainsi que son le temps depuis son dernier démarage',
+	description: 'Donne la latence du bot et de l\'API ainsi que son le temps depuis son dernier démarage',
+	permissions: ['SEND_MESSAGES'],
+	ownerOnly: false,
+	usage: 'ping',
+	examples: ['ping'],
+	category: 'utile',
 	async run (client, message, args) {
 		const tryPong = await message.channel.send("Calcul en cours... Veuillez patienter quelques instants")
 

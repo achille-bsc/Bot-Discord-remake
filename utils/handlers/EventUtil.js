@@ -3,12 +3,17 @@ const { glob } = require('glob');
 const pGlob = promisify(glob);
 const ascii = require('ascii-table');
 const table = new ascii('Événements');
+const Logger = require('../logger')
 
 module.exports = async (client) => {
 	(await pGlob(`${process.cwd()}/events/*/*.js`)).map(async eventFile => {
 		const event = require(eventFile);
 
-		if(!eventList.includes(event.name) || !event.name) return table.addRow(`Evenement non-déclanché: erreur de typo (ou pas de nom) - Fichier => ${eventFile}`, 'Non-CHargé');
+		if(!event.name) return Logger.warn(`Evénement non-déclanché: Ajoutez un NOM à votre évènement\nFichier -> ${eventFile }`)
+
+		if(!eventList.includes(event.name)) {
+			return Logger.typo(`Evenement non-déclanché: erreur de typo (ou pas de nom)\nFichier => ${eventFile}`);
+		} 
 
 
 		if (event.once) {

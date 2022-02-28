@@ -1,4 +1,5 @@
 const { Guild } = require('../../models/index')
+const Logger = require('../../utils/logger')
 
 module.exports = {
 	name: 'guildCreate',
@@ -8,6 +9,6 @@ module.exports = {
 			id: guild.id,
 		})
 
-		createGuild.save().then(g => console.log(`Nouveau serveur (${g.id})`));
+		createGuild.save().then(g => Logger.client(`Nouveau serveur (${g.id})`));
 	},
 };

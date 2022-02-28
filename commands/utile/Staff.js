@@ -4,6 +4,11 @@ const { MessageEmbed } = require('discord.js')
 module.exports = {
 	name: 'staff',
 	description: 'Donne la liste des membres du staff du bot ainsi que leurs rôles',
+	permissions: ['SEND_MESSAGES'],
+	ownerOnly: false,
+	usage: 'staff',
+	examples: ['staff'],
+	category: 'utile',
 	async run (client, message, args) {
 		const embed = new MessageEmbed()
 			.setColor('#4ed5f8')
