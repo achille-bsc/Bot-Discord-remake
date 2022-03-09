@@ -1,0 +1,25 @@
+const { MessageEmbed } = require('discord.js')
+
+module.exports = {
+	name: 'ping',
+	description: 'Donne la latence du bot et de l\'API ainsi que son le temps depuis son dernier démarage',
+	permissions: ['SEND_MESSAGES'],
+	ownerOnly: false,
+	usage: 'ping',
+	examples: ['ping'],
+	category: 'utile',
+	async run (client, message, args) {
+		
+	},
+	async runInteraction (client, interaction) {
+		
+	}
+};
+
+async function waiting(time = 5000) {
+	return new Promise(resolve => {
+		setTimeout(() => {
+			resolve();
+		}, time);
+	});
+}

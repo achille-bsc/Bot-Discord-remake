@@ -7,9 +7,21 @@ const mongoose = require('mongoose')
 const client = new Client({ intents: 515 });
 const Logger = require('./utils/logger')
 
-client.commands = new Collection();
+//client.commands = new Collection();
+//client.buttons = new Collection();
 
-['EventUtil', 'CommandUtil'].forEach(handler => { require(`./utils/handlers/${handler}`)(client); });
+const X = ['commands', 'buttons', 'selects']
+const handlers = ['EventUtil', 'CommandUtil', 'ButtonUtil', 'SelectUtil']
+require('./utils/Functions')(client)
+
+X.forEach(x =>  {
+	client[x] = new Collection();
+});
+handlers.forEach(handler => 
+	{
+		require(`./utils/handlers/${handler}`)(client); 
+	}
+);
 
 process.on('exit', code => { Logger.client(`Le precessus s'est arrêté avec le code ${code} !`) })
 process.on('uncaughtException', (err, origin) => { 

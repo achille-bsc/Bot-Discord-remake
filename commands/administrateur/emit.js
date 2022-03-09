@@ -11,6 +11,7 @@ module.exports = {
 	examples: ['emit guildMemberAdd', 'emit guildMemberRemove'],
 	category: 'administrateur',
 	async run (client, message, args) {
+		if(message.author.id != message.guild.ownerId) return message.reply({content: `Vous devez être le créateur du serveur pour effectuer cette commande !`})
 		if (!args[0] || !args[0].match(/^(guildMemberAdd|guildMemberRemove|guildCreate)$/)) return message.reply({ content: `Merci d'entrer un évènement valide (\`guildMemberAdd\`, \`guildMemberRemove\`)` });
 
 		if (args[0] == 'guildMemberAdd') {
@@ -47,6 +48,7 @@ module.exports = {
 		}
 	],
 	async runInteraction (client, interaction) {
+		if(interaction.user.id != interaction.guild.ownerId) return interaction.reply({content: `Vous devez être le créateur du serveur pour effectuer cette commande !`, ephemeral: true})
 		const evtChoices = interaction.options.getString('event');
 
 		if (evtChoices == 'guildMemberAdd') {
