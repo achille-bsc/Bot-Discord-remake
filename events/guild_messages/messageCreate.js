@@ -4,7 +4,7 @@ const ownerid = '688098375697956905';
 module.exports = {
 	name: 'messageCreate',
 	once: false,
-	execute(client, message) {
+	async execute(client, message) {
 		if (message.author.bot) return;
 		if (!message.content.startsWith(prefix)) return;
 
