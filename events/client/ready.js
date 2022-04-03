@@ -28,7 +28,7 @@ module.exports = {
 			'/help et !help',
 			'derrière toi',
 			`la version V.${package.version}`,
-			'Karma Akabane#6802',
+			'Achille',
 		];
 		setInterval(() => {
 			client.user.setActivity(statuses[i], {
