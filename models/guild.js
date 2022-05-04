@@ -1,7 +1,7 @@
-const mongoose = require('mongoose')
+// const mongoose = require('mongoose')
 
-const guildSchema = mongoose.Schema({
+// const guildSchema = mongoose.Schema({
 	
-})
+// })
 
-module.exports = mongoose.model('Guild', guildSchema);
+// module.exports = mongoose.model('Guild', guildSchema);

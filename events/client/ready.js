@@ -1,4 +1,5 @@
 const colors = require('colors');
+const guild = require('../../models/guild');
 const package = require('../../package.json');
 
 module.exports = {
@@ -12,15 +13,17 @@ module.exports = {
 		console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.bold.green);
 
 		// Instantané
-		const devGuild = await client.guilds.cache.get('841813630172790834');
-		devGuild.commands.set(client.commands.map(cmd => cmd));
+		const devGuild1 = await client.guilds.cache.get('841813630172790834');
+		const devGuild2 = await client.guilds.cache.get('848598227301040159');
+		devGuild1.commands.set(client.commands.map(cmd => cmd));
+		devGuild2.commands.set(client.commands.map(cmd => cmd));
 		
 		// Global => 1H minimum
-		//client.application.commands.set(client.commands.map(cmd => cmd));
+		client.application.commands.set(client.commands.map(cmd => cmd));
 
 		let i = 0;
 		const timeInSec = 10
-
+		
 		// Statut du Bot
 		const statuses = [
 			'ses engrenages...',
