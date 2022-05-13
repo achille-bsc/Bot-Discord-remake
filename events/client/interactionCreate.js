@@ -1,20 +1,10 @@
-const { MessageEmbed } = require('discord.js')
-
 const ownerid = '688098375697956905'
 
 module.exports = {
   name: 'interactionCreate',
   once: false,
   async execute (client, interaction) {
-    if (interaction.isCommand() || interaction.isContextMenu() || interaction.isButton()) {
-      if (interaction.customId === `${interaction.member.id}-forfate`) {
-        const embed = new MessageEmbed()
-          .setTitle('Fin de la partie !')
-          .setDescription('Vous venez de déclarer forfait !')
-          .addField('Victoir', 'Code Industry')
-          .setColor('AQUA')
-        return interaction.message.edit({ embeds: [embed], components: [] })
-      }
+    if (interaction.isCommand() || interaction.isContextMenu()) {
       // let guildSettings = client.getGuild(interaction.guild)
 
       // if(!guildSettings) {

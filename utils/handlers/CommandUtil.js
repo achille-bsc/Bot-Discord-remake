@@ -1,9 +1,8 @@
 const { promisify } = require('util')
 const { glob } = require('glob')
 const pGlob = promisify(glob)
-const Ascii = require('ascii-table')
-const table = new Ascii('Commandes')
 const Logger = require('../logger')
+require('colors')
 
 module.exports = async (client) => {
   (await pGlob(`${process.cwd()}/commands/*/*.js`)).map(async cmdFile => {
@@ -30,9 +29,8 @@ module.exports = async (client) => {
     })
 
     client.commands.set(cmd.name, cmd)
-    table.addRow(cmd.name, 'Chargé')
+    console.log(`${cmd.name}`.blue, '=> ' + 'Chargées'.green)
   })
-  console.log(table.toString().bold.cyan)
   console.log('\n')
 }
 

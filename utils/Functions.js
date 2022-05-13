@@ -1,27 +1,30 @@
-const { client } = require('tmi.js');
-const { Guild } = require('../models');
-const guild = require('../models/guild');
+const { Guild } = require('../models/index')
 
 module.exports = async client => {
-	client.getGuild = async Guild => {
-		const guildData = await Guild.findOne({ id: guild.id })
-		return guildData;
-	};
+  client.createGuild = async guild => {
+    const createGuild = new Guild({
+      id: guild.id
+    })
 
-	client.createGuild = async guild => {
-		const createGuild = new Guild({
-			id: guild.id,
-		})
+    createGuild.save().then(g => console.log(`Nouveau serveur (${g.id})`))
+  }
 
-		createGuild.save().then(g => console.log(`Nouveau serveur (${g.id})`));
-	}
+  client.getGuild = async thisguild => {
+    const guildData = await Guild.findOne({ id: thisguild.id })
+    return guildData
+  }
 
-	client.updateGuild = async (guild, settings) => {
-		let guildData = await client.getGuild(guild);
-		if (typeof(guildData) != 'object') guildData = {};
-		for (const key of settings) {
-			if (guildData[key] != settings[key]) guildData[key] = settings[key]
-		}
-		return guildData.updateOne(settings)
-	}
+  client.updateGuild = async (guild) => {
+    const guildData = await Guild.findOne({ id: guild.id })
+    guildData.prefix = guildData.prefix || '!'
+    guildData.welcomeMessageEnabled = guildData.welcomeMessageEnabled || true
+    guildData.welcomeMessage = guildData.welcomeMessage || '🎉 Bienvenue **{member}** sur le serveur **{server.name}** 🎉}'
+    guildData.welcomeColor = guildData.welcomeColor || 'GREEN'
+    guildData.welcomeChannel = guildData.welcomeChannel || '973164997511352320'
+    guildData.goodByeMessageEnabled = guildData.goodByeMessageEnabled || true
+    guildData.goodByeMessage = guildData.goodByeMessage || '**{member}** viens malhereusement de nous quitter 😢'
+    guildData.goodByeColor = guildData.goodByeColor || 'RED'
+    guildData.goodByeChannel = guildData.goodByeChannel || '973164997511352320'
+    guildData.save().then(g => console.log(`Serveur (${g.id}) mis à jour`))
+  }
 }

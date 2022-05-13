@@ -1,23 +1,23 @@
-const { MessageEmbed, Formatters } = require('discord.js')
-const dayjs = require('dayjs')
-
-const colors = require('colors');
+const { MessageEmbed } = require('discord.js')
 module.exports = {
-	name: 'guildMemberAdd',
-	once: false,
-	async execute(client, member) {
+  name: 'guildMemberAdd',
+  once: false,
+  async execute (client, member) {
+    const guild = client.getGuild(member.guild)
 
-		const embed = new MessageEmbed()
-			.setAuthor({ name: `${member.user.tag} (${member.id})`, iconURL: member.user.displayAvatarURL() })
-			.setColor('GREEN')
-			.setDescription(`± Nom d'utilisateur: ${member}
-			± Créé le: <t:${parseInt(member.user.createdTimestamp / 1000 )}:f> (<t:${parseInt(member.user.createdTimestamp / 1000)}:R>)
-			± Rejoint le: <t:${parseInt(member.joinedTimestamp / 1000 )}:f> (<t:${parseInt(member.joinedTimestamp / 1000 )}:R>)`)
-			.setTimestamp()
-			.setFooter({ text: `L'utilisateur à rejoint !` })
+    if (guild.welcomeMessageEnabled) {
+      if (guild.welcomeMessageEnabled) {
+        const embed = new MessageEmbed()
+          .setAuthor({ name: `${member.user.tag} (${member.id})`, iconURL: member.user.displayAvatarURL() })
+          .setColor(guild.welcomeColor)
+          .setDescription(guild.welcomeMessage)
+          .setTimestamp()
+          .setFooter({ text: 'L\'utilisateur à rejoint !' })
 
-		const logChannel = client.channels.cache.get('946528565271330886');
+        const logChannel = client.channels.cache.get(guild.welcomeChannel)
 
-		logChannel.send({ embeds: [embed] });
-	},
-};
+        logChannel.send({ embeds: [embed] })
+      }
+    }
+  }
+}

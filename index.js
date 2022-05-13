@@ -1,14 +1,15 @@
 const { Client, Collection } = require('discord.js')
 const dotenv = require('dotenv'); dotenv.config()
 const mongoose = require('mongoose')
-const client = new Client({ intents: 515 })
+const client = new Client({ intents: 4609 })
 const Logger = require('./utils/logger')
+require('colors')
 
 const express = require('express')
 const app = express()
 
-// client.commands = new Collection();
-// client.buttons = new Collection();
+client.commands = new Collection()
+client.buttons = new Collection()
 
 const X = ['commands', 'buttons', 'selects']
 const handlers = ['EventUtil', 'CommandUtil', 'ButtonUtil', 'SelectUtil']
@@ -40,16 +41,16 @@ mongoose.connect(process.env.DATABASE_URI, {
   socketTimeoutMS: 45000,
   family: 4
 }).then(() => {
-  console.log(`┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃                                                      ┃
-┃     Le client est connecté à la base de donnée !     ┃
-┃                                                      ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n`.bold.magenta)
-  console.log(`┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃                                ┃
-┃     Chargement en Cours...     ┃
-┃                                ┃
-┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n`.bold.yellow)
+  console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓'.magenta)
+  console.log('┃                                                      ┃'.magenta)
+  console.log('┃     '.magenta + 'Le client est connecté à la base de donnée !' + '     ┃'.magenta)
+  console.log('┃                                                      ┃'.magenta)
+  console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.magenta)
+  console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓'.yellow)
+  console.log('┃                                ┃'.yellow)
+  console.log('┃     '.yellow + 'Chargement en Cours...' + '     ┃'.yellow)
+  console.log('┃                                ┃'.yellow)
+  console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.yellow)
 })
   .catch(err => { console.log(`${err}`.bold.red) })
 

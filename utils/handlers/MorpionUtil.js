@@ -1,8 +1,10 @@
 /* eslint-disable no-multiple-empty-lines */
-const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js')
 
-function wait (waitsecs = 5000) {
-  return new Promise(resolve => setTimeout(resolve, waitsecs))
+
+/* const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js')
+
+function wait (waitTime = 5000) {
+  return new Promise(resolve => setTimeout(resolve, waitTime))
 }
 
 module.exports = { morpion3x3, morpion4x4 }
@@ -26,48 +28,47 @@ const scoreQuatre = [
   8, 4, 4, 8
 ] // Fonctionne !
 
-let AIMove3
-let AIMove4
+// let AIMove3
 // win function 3x3
-function winTrois () {
-  // Tableau de toutes les possibilités de victoire
-  const WinSituation = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
+// function winTrois () {
+//   // Tableau de toutes les possibilités de victoire
+//   const WinSituation = [
+//     [0, 1, 2],
+//     [3, 4, 5],
+//     [6, 7, 8],
 
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
+//     [0, 3, 6],
+//     [1, 4, 7],
+//     [2, 5, 8],
 
-    [0, 4, 8],
-    [6, 4, 2]
-  ]
+//     [0, 4, 8],
+//     [6, 4, 2]
+//   ]
 
-  for (let i = 0; i < WinSituation.length; i++) {
-    const TestRow = WinSituation[i]
-    const RowValues = []
+//   for (let i = 0; i < WinSituation.length; i++) {
+//     const TestRow = WinSituation[i]
+//     const RowValues = []
 
-    // vérifier la victoire
-    for (let j = 0; j < TestRow.length; j++) {
-      RowValues.push(gridTrois[TestRow[j]])
-    }
+//     // vérifier la victoire
+//     for (let j = 0; j < TestRow.length; j++) {
+//       RowValues.push(gridTrois[TestRow[j]])
+//     }
 
-    const CrossesWin = function (Value) {
-      return Value === '❌'
-    }
+//     const CrossesWin = function (Value) {
+//       return Value === '❌'
+//     }
 
-    const NoughtsWin = function (Value) {
-      return Value === '⭕'
-    }
+//     const NoughtsWin = function (Value) {
+//       return Value === '⭕'
+//     }
 
-    if (RowValues.every(CrossesWin)) {
-      return 1
-    } else if (RowValues.every(NoughtsWin)) {
-      return -1
-    }
-  }
-}
+//     if (RowValues.every(CrossesWin)) {
+//       return 1
+//     } else if (RowValues.every(NoughtsWin)) {
+//       return -1
+//     }
+//   }
+// }
 
 // const nextWinSituations = [
 //   [0, 1],
@@ -115,10 +116,10 @@ function winTrois () {
 // ]
 
 // win function 4x4
-function winQuatre () {
+function checkWin (type) {
   // Tableau de toutes les possibilités de victoire
   // Tableau de toutes les possibilités de victoire
-  const WinSituation = [
+  const WinSituation4 = [
     [0, 1, 2],
     [1, 2, 3],
     [4, 5, 6],
@@ -144,190 +145,252 @@ function winQuatre () {
     [6, 9, 12],
     [7, 10, 13]
   ]
+  const WinSituation3 = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
 
-  for (let i = 0; i < WinSituation.length; i++) {
-    const TestRow = WinSituation[i]
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+
+    [0, 4, 8],
+    [6, 4, 2]
+  ]
+
+  for (const situation of (type === '4' ? WinSituation4 : WinSituation3)) {
     const RowValues = []
 
     // vérifier la victoire
-    for (let j = 0; j < TestRow.length; j++) {
-      RowValues.push(gridQuatre[TestRow[j]])
+    for (const test of situation) {
+      RowValues.push((type === '4' ? gridQuatre : gridTrois)[test])
     }
 
-    const CrossesWin = function (Value) {
-      return Value === '❌'
-    }
-
-    const NoughtsWin = function (Value) {
-      return Value === '⭕'
-    }
-
-    if (RowValues.every(CrossesWin)) {
-      return 1
-    } else if (RowValues.every(NoughtsWin)) {
+    if (RowValues.every((value) => value === '❌')) {
       return -1
+    } else if (RowValues.every((value) => value === '⭕')) {
+      return 1
     }
   }
+  return 0
 }
 
-function minimaxTrois (newGrid, player, level) {
-  let limit = 0
-  const availables = newGrid.filter(function (a) {
-    return typeof a === 'number'
-  })
+// function minimaxTrois (newGrid, player, level) {
+//   let limit = 0
+//   const availables = newGrid.filter(function (a) {
+//     return typeof a === 'number'
+//   })
 
-  if (winTrois(newGrid) === 1) {
-    return 1
-  } else if (winTrois(newGrid) === -1) {
-    return -1
-  } else if (availables.length === 0) {
-    return 0
-  }
+//   if (winTrois(newGrid) === 1) {
+//     return 1
+//   } else if (winTrois(newGrid) === -1) {
+//     return -1
+//   } else if (availables.length === 0) {
+//     return 0
+//   }
 
-  const moves = []
-  const scores = []
+//   const moves = []
+//   const scores = []
 
-  for (const available of availables) {
-    const move = newGrid[available]
-    newGrid[available] = player
-    if (player === '❌' && limit < level) {
-      limit = limit + 1
-      scores.push(minimaxTrois(newGrid, '⭕', 4))
-    } else if (player === '⭕' && limit < level) {
-      limit = limit + 1
-      scores.push(minimaxTrois(newGrid, '❌', 4))
+//   for (const available of availables) {
+//     const move = newGrid[available]
+//     newGrid[available] = player
+//     if (player === '❌' && limit < level) {
+//       limit = limit + 1
+//       scores.push(minimaxTrois(newGrid, '⭕', 4))
+//     } else if (player === '⭕' && limit < level) {
+//       limit = limit + 1
+//       scores.push(minimaxTrois(newGrid, '❌', 4))
+//     }
+//     newGrid[available] = move
+//     moves.push(move)
+//   }
+
+//   if (player === '❌') {
+//     const HighScore = Math.max(...scores)
+//     const HighScoreIndex = scores.indexOf(HighScore)
+//     AIMove3 = moves[HighScoreIndex]
+//     return scores[HighScoreIndex]
+//   } else {
+//     const LowScore = Math.min(...scores)
+//     const LowScoreIndex = scores.indexOf(LowScore)
+//     AIMove3 = moves[LowScoreIndex]
+//     return scores[LowScoreIndex]
+//   }
+// }
+
+function evaluate (grid) {
+  let total = 0
+  for (const position of grid) {
+    if (typeof position !== 'number') {
+      continue
     }
-    newGrid[available] = move
-    moves.push(move)
+    const sign = position === '⭕' ? 1 : -1
+    const movescore = scoreQuatre[position]
+    total += sign * movescore
   }
+  return total
+}
 
-  if (player === '❌') {
-    const HighScore = Math.max(...scores)
-    const HighScoreIndex = scores.indexOf(HighScore)
-    AIMove3 = moves[HighScoreIndex]
-    return scores[HighScoreIndex]
+
+function minimax (newGrid, player, depth, type) {
+  const winner = checkWin(type)
+  if (winner === -1 || winner === 1) return winner * 1000
+
+  if (depth <= 0) return evaluate(newGrid)
+
+  const availables = newGrid.filter((a) => typeof a === 'number')
+
+  if (player === '⭕') {
+    let score = -Infinity
+    for (const available of availables) {
+      const move = newGrid[available]
+
+      newGrid[available] = '❌'
+      score = Math.max(minimax(newGrid, '❌', depth - 1, type), score)
+      newGrid[available] = move
+    }
+
+    return score
   } else {
-    const LowScore = Math.min(...scores)
-    const LowScoreIndex = scores.indexOf(LowScore)
-    AIMove3 = moves[LowScoreIndex]
-    return scores[LowScoreIndex]
-  }
-}
+    let score = +Infinity
+    for (const available of availables) {
+      const move = newGrid[available]
 
-
-async function minimaxQuatre (newGrid, player, step) {
-  const winner = winQuatre()
-  if (winner) {
-    return winner - 1000
-  }
-
-  const availables = newGrid.filter(function (a) {
-    return typeof a === 'number'
-  })
-
-  const scoresList = []
-  const movesList = []
-
-  for (const available of availables) {
-    if (step <= 0) {
-      return 0
+      newGrid[available] = '⭕'
+      score = Math.min(minimax(newGrid, '⭕', depth - 1, type), score)
+      newGrid[available] = move
     }
-
-    const move = newGrid[available]
-    newGrid[available] = player
-
-    minimaxQuatre(newGrid, player, step - 1)
-    const movescore = scoreQuatre[available]
-    newGrid[available] = move
-    scoresList.push(movescore)
-    movesList.push(move)
+    return score
   }
-
-  const lowScore = Math.min(...scoresList)
-  const lowScoreIndex = scoresList.indexOf(lowScore)
-  AIMove4 = movesList[lowScoreIndex]
-  return scoresList[lowScoreIndex]
 }
+
+function rows (message, grid) {
+  const row1 = new MessageActionRow()
+    .addComponents(
+      new MessageButton()
+        .setCustomId(`${message.author.id}-0`)
+        .setLabel(`${typeof grid[0] === 'number' ? grid[0] + 1 : grid[0]}`)
+        .setStyle('SECONDARY'),
+      new MessageButton()
+        .setCustomId(`${message.author.id}-1`)
+        .setLabel(`${typeof grid[1] === 'number' ? grid[1] + 1 : grid[1]}`)
+        .setStyle('SECONDARY'),
+      new MessageButton()
+        .setCustomId(`${message.author.id}-2`)
+        .setLabel(`${typeof grid[2] === 'number' ? grid[2] + 1 : grid[2]}`)
+        .setStyle('SECONDARY'),
+      grid === gridQuatre
+        ? new MessageButton()
+          .setCustomId(`${message.author.id}-3`)
+          .setLabel(`${typeof grid[3] === 'number' ? grid[3] + 2 : grid[3]}`)
+          .setStyle('SECONDARY')
+        : null
+
+    )
+
+  console.log((grid === gridQuatre ? (typeof grid[4] === 'number' ? grid[4] + 1 : grid[4]) : (typeof grid[3] === 'number' ? grid[3] + 1 : grid[3])))
+
+  const row2 = new MessageActionRow()
+    .addComponents(
+      new MessageButton()
+        .setCustomId(`${message.author.id}-${grid === gridQuatre ? '4' : '3'}`)
+        .setLabel(`${(grid === gridQuatre ? (typeof grid[4] === 'number' ? grid[4] + 1 : grid[4]) : (typeof grid[3] === 'number' ? grid[3] + 1 : grid[3]))}`)
+        .setStyle('SECONDARY'),
+      new MessageButton()
+        .setCustomId(`${message.author.id}-${grid === gridQuatre ? '5' : '4'}`)
+        .setLabel(`${(grid === gridQuatre ? (typeof grid[5] === 'number' ? grid[5] + 1 : grid[5]) : (typeof grid[4] === 'number' ? grid[4] + 1 : grid[4]))}`)
+        .setStyle('SECONDARY'),
+      new MessageButton()
+        .setCustomId(`${message.author.id}-${grid === gridQuatre ? '6' : '5'}`)
+        .setLabel(`${(grid === gridQuatre ? (typeof grid[6] === 'number' ? grid[6] + 1 : grid[6]) : (typeof grid[5] === 'number' ? grid[5] + 1 : grid[5]))}`)
+        .setStyle('SECONDARY'),
+      grid === gridQuatre
+        ? new MessageButton()
+          .setCustomId(`${message.author.id}-7`)
+          .setLabel(`${typeof grid[7] === 'number' ? grid[7] + 2 : grid[7]}`)
+          .setStyle('SECONDARY')
+        : null
+
+
+    )
+
+  const row3 = new MessageActionRow()
+    .addComponents(
+      new MessageButton()
+        .setCustomId(`${message.author.id}-${grid === gridQuatre ? '8' : '6'}`)
+        .setLabel(`${(grid === gridQuatre ? (typeof grid[8] === 'number' ? grid[8] + 1 : grid[8]) : (typeof grid[6] === 'number' ? grid[6] + 1 : grid[6]))}`)
+        .setStyle('SECONDARY'),
+      new MessageButton()
+        .setCustomId(`${message.author.id}-${grid === gridQuatre ? '9' : '7'}`)
+        .setLabel(`${(grid === gridQuatre ? (typeof grid[9] === 'number' ? grid[9] + 1 : grid[9]) : (typeof grid[7] === 'number' ? grid[7] + 1 : grid[7]))}`)
+        .setStyle('SECONDARY'),
+      new MessageButton()
+        .setCustomId(`${message.author.id}-${grid === gridQuatre ? '10' : '8'}`)
+        .setLabel(`${(grid === gridQuatre ? (typeof grid[10] === 'number' ? grid[10] + 1 : grid[10]) : (typeof grid[8] === 'number' ? grid[8] + 1 : grid[8]))}`)
+        .setStyle('SECONDARY'),
+      grid === gridQuatre
+        ? new MessageButton()
+          .setCustomId(`${message.author.id}-11`)
+          .setLabel(`${typeof grid[11] === 'number' ? grid[11] + 2 : grid[11]}`)
+          .setStyle('SECONDARY')
+        : null
+    )
+  let row4 = null
+
+  if (grid === gridQuatre) {
+    row4 = new MessageActionRow()
+      .addComponents(
+        new MessageButton()
+          .setCustomId(`${message.author.id}-12`)
+          .setLabel(`${typeof grid[12] === 'number' ? grid[12] + 1 : grid[12]}`)
+          .setStyle('SECONDARY')
+
+      )
+      .addComponents(
+        new MessageButton()
+          .setCustomId(`${message.author.id}-13`)
+          .setLabel(`${typeof grid[13] === 'number' ? grid[2] + 1 : grid[2]}`)
+          .setStyle('SECONDARY')
+
+      )
+      .addComponents(
+        new MessageButton()
+          .setCustomId(`${message.author.id}-14`)
+          .setLabel(`${typeof grid[14] === 'number' ? grid[14] + 1 : grid[14]}`)
+          .setStyle('SECONDARY')
+
+      )
+      .addComponents(
+        new MessageButton()
+          .setCustomId(`${message.author.id}-15`)
+          .setLabel(`${typeof grid[15] === 'number' ? grid[15] + 1 : grid[15]}`)
+          .setStyle('SECONDARY')
+      )
+  }
+  if (row4 === null) {
+    return [row1, row2, row3]
+  } else {
+    return [row1, row2, row3, row4]
+  }
+}
+
 
 // ----- MORPION 3x3 ----- //
 
 async function morpion3x3 (message, level, gmode) {
-  level = level + 2
+  level = 5
+
   const messageEmbedTrois = new MessageEmbed()
     .setTitle('Morpion')
     .setDescription('Voici une nouvelle partie de morpion !')
     .setColor('#0099ff')
 
-  const row1x3 = new MessageActionRow()
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-0`)
-        .setLabel('0')
-        .setStyle('SECONDARY')
 
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-1`)
-        .setLabel('1')
-        .setStyle('SECONDARY')
 
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-2`)
-        .setLabel('2')
-        .setStyle('SECONDARY')
+  // const grille = await message.channel.send({ embeds: [messageEmbedTrois], components: [row1x3, row2x3, row3x3] })
 
-    )
-
-  const row2x3 = new MessageActionRow()
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-3`)
-        .setLabel('3')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-4`)
-        .setLabel('4')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-5`)
-        .setLabel('5')
-        .setStyle('SECONDARY')
-
-    )
-
-  const row3x3 = new MessageActionRow()
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-6`)
-        .setLabel('6')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-7`)
-        .setLabel('7')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-8`)
-        .setLabel('8')
-        .setStyle('SECONDARY')
-
-    )
-
-  const grille = await message.channel.send({ embeds: [messageEmbedTrois], components: [row1x3, row2x3, row3x3] })
+  const grille = await message.channel.send({ embeds: [messageEmbedTrois], components: rows(message, gridTrois) })
 
   let Play3 = 1
   let Turn3 = 1
@@ -337,7 +400,7 @@ async function morpion3x3 (message, level, gmode) {
     const Available = gridTrois.filter(function (a) {
       return typeof a === 'number'
     })
-    if ((winTrois(gridTrois) === 1) || (winTrois(gridTrois) === -1) || (Available.length === 0)) {
+    if ((checkWin('3') === 1) || (checkWin('3') === -1) || (Available.length === 0)) {
       Play3 = 0
 
       gridTrois = [
@@ -392,76 +455,7 @@ async function morpion3x3 (message, level, gmode) {
               played = 1
               i.reply({ content: 'Vous venez de jouer avec succès !', ephemeral: false })
 
-              const row1 = new MessageActionRow()
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-0`)
-                    .setLabel(`${gridTrois[0]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-1`)
-                    .setLabel(`${gridTrois[1]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-2`)
-                    .setLabel(`${gridTrois[2]}`)
-                    .setStyle('SECONDARY')
-
-                )
-
-              const row2 = new MessageActionRow()
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-3`)
-                    .setLabel(`${gridTrois[3]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-4`)
-                    .setLabel(`${gridTrois[4]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-5`)
-                    .setLabel(`${gridTrois[5]}`)
-                    .setStyle('SECONDARY')
-
-                )
-
-              const row3 = new MessageActionRow()
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-6`)
-                    .setLabel(`${gridTrois[6]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-7`)
-                    .setLabel(`${gridTrois[7]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-8`)
-                    .setLabel(`${gridTrois[8]}`)
-                    .setStyle('SECONDARY')
-
-                )
-
-              await grille.edit({ embeds: [messageEmbedTrois], components: [row1, row2, row3] })
+              await grille.edit({ embeds: [messageEmbedTrois], components: rows(message, gridTrois) })
               await wait(100)
               i.deleteReply()
             })
@@ -477,79 +471,26 @@ async function morpion3x3 (message, level, gmode) {
           .setColor('#0099ff')
         await grille.edit({ embeds: [messageEmbedTrois] })
         Turn3 = 1
-        minimaxTrois(gridTrois, AI3, level)
-        gridTrois[AIMove3] = AI3
 
-        const row1 = new MessageActionRow()
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-0`)
-              .setLabel(`${gridTrois[0]}`)
-              .setStyle('SECONDARY')
 
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-1`)
-              .setLabel(`${gridTrois[1]}`)
-              .setStyle('SECONDARY')
+        let score = -Infinity
+        let move
+        const availables = gridQuatre.filter((a) => typeof a === 'number')
 
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-2`)
-              .setLabel(`${gridTrois[2]}`)
-              .setStyle('SECONDARY')
+        for (const position of availables) {
+          const oldCase = gridQuatre[position]
+          gridQuatre[position] = AI3
+          const testScore = minimax(gridTrois, AI3, level, '3')
+          if (testScore > score) {
+            score = testScore
+            move = position
+          }
+          gridQuatre[position] = oldCase
+        }
 
-          )
+        gridTrois[move] = AI3
 
-        const row2 = new MessageActionRow()
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-3`)
-              .setLabel(`${gridTrois[3]}`)
-              .setStyle('SECONDARY')
-
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-4`)
-              .setLabel(`${gridTrois[4]}`)
-              .setStyle('SECONDARY')
-
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-5`)
-              .setLabel(`${gridTrois[5]}`)
-              .setStyle('SECONDARY')
-
-          )
-
-        const row3 = new MessageActionRow()
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-6`)
-              .setLabel(`${gridTrois[6]}`)
-              .setStyle('SECONDARY')
-
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-7`)
-              .setLabel(`${gridTrois[7]}`)
-              .setStyle('SECONDARY')
-
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-8`)
-              .setLabel(`${gridTrois[8]}`)
-              .setStyle('SECONDARY')
-
-          )
-
-        grille.edit({ embeds: [messageEmbedTrois], components: [row1, row2, row3] })
+        await grille.edit({ embeds: [messageEmbedTrois], components: rows(message, gridTrois) })
       }
     }
   }
@@ -566,148 +507,14 @@ async function morpion3x3 (message, level, gmode) {
 
 async function morpion4x4 (message, level = 2, gmode) {
   if (level === 1) {
-    level = 2
-  }
-  if (level === 2) {
     level = 3
-  }
-  if (level === 3) {
-    level = 4
   }
   const messageEmbedQuatre = new MessageEmbed()
     .setTitle('Morpion')
     .setDescription('Voici une nouvelle partie de morpion !')
     .setColor('#0099ff')
 
-  const row1x4 = new MessageActionRow()
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-0`)
-        .setLabel('0')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-1`)
-        .setLabel('1')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-2`)
-        .setLabel('2')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-3`)
-        .setLabel('3')
-        .setStyle('SECONDARY')
-
-    )
-
-  const row2x4 = new MessageActionRow()
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-4`)
-        .setLabel('4')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-5`)
-        .setLabel('5')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-6`)
-        .setLabel('6')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-7`)
-        .setLabel('7')
-        .setStyle('SECONDARY')
-
-    )
-
-  const row3x4 = new MessageActionRow()
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-8`)
-        .setLabel('8')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-9`)
-        .setLabel('9')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-10`)
-        .setLabel('10')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-11`)
-        .setLabel('11')
-        .setStyle('SECONDARY')
-
-    )
-
-  const row4x4 = new MessageActionRow()
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-12`)
-        .setLabel('12')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-13`)
-        .setLabel('13')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-14`)
-        .setLabel('14')
-        .setStyle('SECONDARY')
-
-    )
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-15`)
-        .setLabel('15')
-        .setStyle('SECONDARY')
-
-    )
-
-  const rowForfate = new MessageActionRow()
-    .addComponents(
-      new MessageButton()
-        .setCustomId(`${message.author.id}-forfate`)
-        .setLabel('Déclarer forfait')
-        .setStyle('PRIMARY')
-
-    )
-  const grille = await message.channel.send({ embeds: [messageEmbedQuatre], components: [row1x4, row2x4, row3x4, row4x4, rowForfate] })
+  const grille = await message.channel.send({ embeds: [messageEmbedQuatre], components: rows(message, gridQuatre) })
 
   let Play4 = 1
   let Turn4 = 1
@@ -717,7 +524,7 @@ async function morpion4x4 (message, level = 2, gmode) {
   })
 
   while (Play4 !== 0) {
-    if ((winQuatre() === 1) || (winQuatre() === -1) || (Available.length === 0)) {
+    if ((checkWin('4') === 1) || (checkWin('4') === -1) || (Available.length === 0)) {
       Play4 = 0
 
       gridQuatre = [
@@ -778,127 +585,7 @@ async function morpion4x4 (message, level = 2, gmode) {
               played = 1
               await i.reply({ content: 'Vous venez de jouer avec succès !', ephemeral: false })
 
-              const row1 = new MessageActionRow()
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-0`)
-                    .setLabel(`${gridQuatre[0]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-1`)
-                    .setLabel(`${gridQuatre[1]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-2`)
-                    .setLabel(`${gridQuatre[2]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-3`)
-                    .setLabel(`${gridQuatre[3]}`)
-                    .setStyle('SECONDARY')
-
-                )
-
-              const row2 = new MessageActionRow()
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-4`)
-                    .setLabel(`${gridQuatre[4]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-5`)
-                    .setLabel(`${gridQuatre[5]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-6`)
-                    .setLabel(`${gridQuatre[6]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-7`)
-                    .setLabel(`${gridQuatre[7]}`)
-                    .setStyle('SECONDARY')
-
-                )
-
-              const row3 = new MessageActionRow()
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-8`)
-                    .setLabel(`${gridQuatre[8]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-9`)
-                    .setLabel(`${gridQuatre[9]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-10`)
-                    .setLabel(`${gridQuatre[10]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-11`)
-                    .setLabel(`${gridQuatre[11]}`)
-                    .setStyle('SECONDARY')
-
-                )
-
-              const row4 = new MessageActionRow()
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-12`)
-                    .setLabel(`${gridQuatre[12]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-13`)
-                    .setLabel(`${gridQuatre[13]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-14`)
-                    .setLabel(`${gridQuatre[14]}`)
-                    .setStyle('SECONDARY')
-
-                )
-                .addComponents(
-                  new MessageButton()
-                    .setCustomId(`${message.author.id}-15`)
-                    .setLabel(`${gridQuatre[15]}`)
-                    .setStyle('SECONDARY')
-
-                )
-
-              await grille.edit({ embeds: [messageEmbedQuatre], components: [row1, row2, row3, row4] })
+              await grille.edit({ embeds: [messageEmbedQuatre], components: rows(message, gridQuatre) })
               await wait(100)
               await i.deleteReply()
             })
@@ -916,132 +603,26 @@ async function morpion4x4 (message, level = 2, gmode) {
         await grille.edit({ embeds: [messageEmbedQuatre] })
 
 
-        minimaxQuatre(gridQuatre, AI4, level)
-        gridQuatre[AIMove4] = AI4
+        let score = -Infinity
+        let move
+        const availables = gridQuatre.filter((a) => typeof a === 'number')
 
-        const row1 = new MessageActionRow()
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-0`)
-              .setLabel(`${gridQuatre[0]}`)
-              .setStyle('SECONDARY')
+        for (const position of availables) {
+          const oldCase = gridQuatre[position]
+          gridQuatre[position] = AI4
+          const testScore = minimax(gridQuatre, AI4, level, '4')
+          if (testScore > score) {
+            score = testScore
+            move = position
+          }
+          gridQuatre[position] = oldCase
+        }
 
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-1`)
-              .setLabel(`${gridQuatre[1]}`)
-              .setStyle('SECONDARY')
+        gridQuatre[move] = AI4
 
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-2`)
-              .setLabel(`${gridQuatre[2]}`)
-              .setStyle('SECONDARY')
-
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-3`)
-              .setLabel(`${gridQuatre[3]}`)
-              .setStyle('SECONDARY')
-
-          )
-
-        const row2 = new MessageActionRow()
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-4`)
-              .setLabel(`${gridQuatre[4]}`)
-              .setStyle('SECONDARY')
-
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-5`)
-              .setLabel(`${gridQuatre[5]}`)
-              .setStyle('SECONDARY')
-
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-6`)
-              .setLabel(`${gridQuatre[6]}`)
-              .setStyle('SECONDARY')
-
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-7`)
-              .setLabel(`${gridQuatre[7]}`)
-              .setStyle('SECONDARY')
-
-          )
-
-        const row3 = new MessageActionRow()
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-8`)
-              .setLabel(`${gridQuatre[8]}`)
-              .setStyle('SECONDARY')
-
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-9`)
-              .setLabel(`${gridQuatre[9]}`)
-              .setStyle('SECONDARY')
-
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-10`)
-              .setLabel(`${gridQuatre[10]}`)
-              .setStyle('SECONDARY')
-
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-11`)
-              .setLabel(`${gridQuatre[11]}`)
-              .setStyle('SECONDARY')
-
-          )
-
-        const row4 = new MessageActionRow()
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-12`)
-              .setLabel(`${gridQuatre[12]}`)
-              .setStyle('SECONDARY')
-
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-13`)
-              .setLabel(`${gridQuatre[13]}`)
-              .setStyle('SECONDARY')
-
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-14`)
-              .setLabel(`${gridQuatre[14]}`)
-              .setStyle('SECONDARY')
-
-          )
-          .addComponents(
-            new MessageButton()
-              .setCustomId(`${message.author.id}-15`)
-              .setLabel(`${gridQuatre[15]}`)
-              .setStyle('SECONDARY')
-
-          )
-
-        grille.edit({ embeds: [messageEmbedQuatre], components: [row1, row2, row3, row4] })
+        grille.edit({ embeds: [messageEmbedQuatre], components: rows(message, gridQuatre) })
       }
     }
   }
   ;
-}
+} */

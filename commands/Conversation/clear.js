@@ -1,5 +1,3 @@
-const { MessageEmbed, Message, MessageActionRow, MessageButton } = require('discord.js')
-
 module.exports = {
   name: 'clear',
   description: 'Supprime entre 1 à 100 messages dans une conversation ou pour un utilisateur seulement',
@@ -57,7 +55,7 @@ module.exports = {
 
   ],
   async runInteraction (client, interaction) {
-    const amountToDelete = parsInt(interaction.options.getNumber('messages'))
+    const amountToDelete = parseInt(interaction.options.getNumber('messages'))
     if (amountToDelete > 100 || amountToDelete < 1) return interaction.reply({ content: 'Le nombre de messages doit être compris entre 1 et 100 inclus', ephemeral: true })
     const target = interaction.options.getMember('user')
     let channelToDelete = interaction.options.getChannel('channel')

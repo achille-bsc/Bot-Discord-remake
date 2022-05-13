@@ -1,23 +1,23 @@
-const { MessageEmbed, Formatters } = require('discord.js')
-const dayjs = require('dayjs')
-
-const colors = require('colors');
+const { MessageEmbed } = require('discord.js')
 module.exports = {
-	name: 'guildMemberRemove',
-	once: false,
-	async execute(client, member) {
-		const embed = new MessageEmbed()
-			.setAuthor({ name: `${member.user.tag} (${member.id})`, iconURL: member.user.displayAvatarURL() })
-			.setColor('RED')
-			.setDescription(`± Nom d'utilisateur: ${member.displayName}
-			± Créé le: <t:${parseInt(member.user.createdTimestamp / 1000 )}:f> (<t:${parseInt(member.user.createdTimestamp / 1000)}:R>)
-			± Rejoint le: <t:${parseInt(member.joinedTimestamp / 1000 )}:f> (<t:${parseInt(member.joinedTimestamp / 1000 )}:R>)
-			± Quitté le: <t:${parseInt(Date.now() / 1000 )}:f> (<t:${parseInt(Date.now() / 1000 )}:R>)`)
-			.setTimestamp()
-			.setFooter({ text: `L'utilisateur à quitté !` })
+  name: 'guildMemberRemove',
+  once: false,
+  async execute (client, member) {
+    const guild = client.getGuild(member.guild)
 
-		const logChannel = client.channels.cache.get('946528565271330886');
+    if (guild.goodByeEnabled) {
+      if (guild.goodByeMessageEnabled) {
+        const embed = new MessageEmbed()
+          .setAuthor({ name: `${member.user.tag} (${member.id})`, iconURL: member.user.displayAvatarURL() })
+          .setColor(guild.goodByeColor)
+          .setDescription(guild.goodByeMessage)
+          .setTimestamp()
+          .setFooter({ text: 'L\'utilisateur à rejoint !' })
 
-		logChannel.send({ embeds: [embed] })
-	},
-};
+        const logChannel = client.channels.cache.get(guild.goodByeChannel)
+
+        logChannel.send({ embeds: [embed] })
+      }
+    }
+  }
+}
