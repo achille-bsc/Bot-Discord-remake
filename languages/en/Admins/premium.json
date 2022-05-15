@@ -1,0 +1,8 @@
+{
+  "embedTitleCorp": "Premium mode has been successfully",
+  "embedTitleActiv": "activated",
+  "embedTitleDesactiv": "desactivated",
+
+  "erreurTitle": "Error",
+  "erreurMsg": "An error occurred while saving the configuration. Please try again later.\nIf the problem persists, please contact an administrator.\nError:"
+}

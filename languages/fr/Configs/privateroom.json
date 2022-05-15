@@ -1,0 +1,14 @@
+{
+  "embedTitle": "Le salon de privateRoom à correctement été créé",
+
+  "embedDescrptionPart1": "Le salon de privateRoom a été créé avec succès",
+  "embedDescriptionPart2": "Désormais, tout les salons de privateRoom du serveur serons supprimés",
+  "embedDescriptionPart3": "secondes après avoir été vidés",
+  "embedDescriptionPart4": "vous devez être premium pour inscrire une durée suppérieure à 15 secondes",
+
+  "erreurPremiumTitle": "Erreur",
+  "erreurPremiumDescription": "Vous avez déjà un salon de privateRoom. Vous ne pouvez pas en créer d'autre avant de supprimer celui ou de vous procurer la version prémium",
+
+  "erreurTitle": "Erreur",
+  "erreurDescription": "Une erreur est survenue lors de la sauvegarde de la configuration. Veuillez réessayer ultérieurement.\nSi le problème persiste, veuilleze contactez un administrateur"
+}

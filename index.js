@@ -1,7 +1,7 @@
 const { Client, Collection } = require('discord.js')
 const dotenv = require('dotenv'); dotenv.config()
 const mongoose = require('mongoose')
-const client = new Client({ intents: 4609 })
+const client = new Client({ intents: 98303 })
 const Logger = require('./utils/logger')
 require('colors')
 
@@ -41,11 +41,11 @@ mongoose.connect(process.env.DATABASE_URI, {
   socketTimeoutMS: 45000,
   family: 4
 }).then(() => {
-  console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓'.magenta)
-  console.log('┃                                                      ┃'.magenta)
-  console.log('┃     '.magenta + 'Le client est connecté à la base de donnée !' + '     ┃'.magenta)
-  console.log('┃                                                      ┃'.magenta)
-  console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.magenta)
+  console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━┓'.magenta)
+  console.log('┃                        ┃'.magenta)
+  console.log('┃     '.magenta + 'DB Connectée !' + '     ┃'.magenta)
+  console.log('┃                        ┃'.magenta)
+  console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.magenta)
   console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓'.yellow)
   console.log('┃                                ┃'.yellow)
   console.log('┃     '.yellow + 'Chargement en Cours...' + '     ┃'.yellow)

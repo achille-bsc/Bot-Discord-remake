@@ -18,8 +18,8 @@ module.exports = {
     if (target) {
       let i = 0
       const filteredTargetMessages = [];
-      (await messagesToDelete).filter(msg => {
-        if (msg.author.id == target.id && amountToDelete > i) {
+      (await messagesToDelete).filter(async msg => {
+        if (msg.author.id === target.id && amountToDelete > i) {
           filteredTargetMessages.push(msg); i++
         }
       })
@@ -66,8 +66,8 @@ module.exports = {
     if (target) {
       let i = 0
       const filteredTargetMessages = [];
-      (await messagesToDelete).filter(msg => {
-        if (msg.author.id == target.id && amountToDelete > i) {
+      (await messagesToDelete).filter(async msg => {
+        if (msg.author.id === target.id && amountToDelete > i) {
           filteredTargetMessages.push(msg); i++
         }
       })

@@ -1,0 +1,14 @@
+{
+  "embedTitleCorp": "Command",
+  "embedTitleActive": "activated",
+  "embedTitleDesactive": "desactivated",
+
+  "embedDescriptionActivated": "The system has corectly been activated",
+  "embedDescriptionDesactivated": "The system has corectly been desactivated",
+
+  "embedFooterActivated": "Goodbye message activated",
+  "embedFooterDesactived": "Goodbye message desactivated",
+
+  "erreurTitle": "Error",
+  "erreurDescription": "An error occurred while saving the configuration. Please try again later.\nIf the problem persists, please contact an administrator."
+}

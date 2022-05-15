@@ -1,4 +1,6 @@
 const { MessageEmbed } = require('discord.js')
+const langFr = require('../../languages/fr/Configs/prefix.json')
+const langEn = require('../../languages/en/Configs/prefix.json')
 
 module.exports = {
   name: 'prefix',
@@ -13,7 +15,7 @@ module.exports = {
   options: [
     {
       name: 'prefixe',
-      description: 'Nouveau préfixe.',
+      description: 'Nouveau préfixe ("{default}" pour remettre la valeur par défaut)',
       type: 'STRING',
       required: true
     }
@@ -21,21 +23,22 @@ module.exports = {
   ],
   async runInteraction (client, interaction) {
     const guild = await client.getGuild(interaction.guild)
+    const langue = guild.langue
 
     const prefix = interaction.options.getString('prefixe')
     if (prefix !== null) {
       guild.prefix = prefix
       guild.save().then(() => {
         const embed = new MessageEmbed()
-          .setTitle(`Le préfix à correctement été défini sur \`${guild.prefix}\``)
+          .setTitle(`${langue === 'fr' ? langFr.embedTitle : langEn.embedTitle} \`${guild.prefix}\``)
           .setColor('GREEN')
           .setTimestamp()
         interaction.reply({ embeds: [embed], ephemeral: true })
       }).catch((error) => {
         const erreur = new MessageEmbed()
-          .setTitle('Erreur')
+          .setTitle(langue === 'fr' ? langFr.erreurTitle : langEn.erreurTitle)
           .setColor('RED')
-          .setDescription(`Une erreur est survenue lors de la sauvegarde de la configuration. Veuillez réessayer ultérieurement.\nSi le problème persiste, contactez un administrateur.\n\`\`\`${error}\`\`\``)
+          .setDescription(`${langue === 'fr' ? langFr.erreurDescription : langEn.erreurDescription}\n\`\`\`${error}\`\`\``)
 
         interaction.reply({ embeds: [erreur], ephemeral: true })
       })

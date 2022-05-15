@@ -1,0 +1,14 @@
+{
+  "embedTitle": "The privateRoom channel has corectly been created",
+
+  "embedDescrptionPart1": "The privateRoom channel has succesfully been created",
+  "embedDescriptionPart2": "From now, all the privateRoom channels will be deleted",
+  "embedDescriptionPart3": "seconds after being emptied",
+  "embedDescriptionPart4": "you must be premium to enter a duration greater than 15 seconds",
+
+  "erreurPremiumTitle": "Error",
+  "erreurPremiumDescription": "You have ever a privateRoom channel. You can not create a new one before you delete the old one or buy the premium version",
+
+  "erreurTitle": "Error",
+  "erreurDescription": "An error occurred while saving the configuration. Please try again later.\nIf the problem persists, please contact an administrator"
+}

@@ -9,6 +9,20 @@ module.exports = {
   examples: ['infos'],
   category: 'informations',
   async run (client, message, args) {
+    const guild = await client.getGuild(message.guild)
+
+    const pingEmbed = new MessageEmbed()
+      .setColor('#4ED5F8')
+      .setTitle('Latence du bot')
+      .setDescription('Informations sur les configurations du serveur')
+      .addField('Message de bienvenue', `\`${guild.welcomeMessageEnabled ? 'Activé' : 'Désactivé'}\``, true)
+      .addField('Message de Au Revoir', `\`${guild.goodByeMessageEnabled ? 'Activé' : 'Désactivé'}\``, true)
+      .addField('Serveur Premium', `**\`${guild.premium ? 'Oui' : 'Non'}\`**`, true)
+      .addField('Premium Activé', `**\`${(guild.premium && guild.activated) ? 'Oui' : 'Non'}\`**`, true)
+      .setTimestamp()
+
+    await message.channel.send({ embeds: [pingEmbed] })
+    await message.delete()
   },
   options: [],
 
@@ -21,6 +35,8 @@ module.exports = {
       .setDescription('Informations sur les configurations du serveur')
       .addField('Message de bienvenue', `\`${guild.welcomeMessageEnabled ? 'Activé' : 'Désactivé'}\``, true)
       .addField('Message de Au Revoir', `\`${guild.goodByeMessageEnabled ? 'Activé' : 'Désactivé'}\``, true)
+      .addField('Serveur Premium', `**\`${guild.premium ? 'Oui' : 'Non'}\`**`, true)
+      .addField('Premium Activé', `**\`${(guild.premium && guild.activated) ? 'Oui' : 'Non'}\`**`, true)
       .setTimestamp()
       .setFooter({ text: `Demandé par ${interaction.member.user.tag}`, avatarURL: `${interaction.member.user.displayAvatarURL(true)}` })
 

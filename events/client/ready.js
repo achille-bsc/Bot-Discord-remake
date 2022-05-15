@@ -15,8 +15,9 @@ module.exports = {
     // Instantané
     const devGuild1 = await client.guilds.cache.get('848598227301040159')
     // const devGuild2 = await client.guilds.cache.get('848598227301040159')
-    setTimeout(() => {
-      devGuild1.commands.set(client.commands.map(cmd => cmd))
+    setTimeout(async () => {
+      await devGuild1.commands.set(client.commands.map(cmd => cmd))
+      console.log('COMMANDES MISES À JOURS !'.green)
     }, 1000)
     // devGuild2.commands.set(client.commands.map(cmd => cmd))
 
@@ -46,6 +47,7 @@ module.exports = {
         if (guildDb.premium) {
           if (guildDb.endPremiumTimestamp <= Date.now()) {
             guildDb.premium = false
+            guildDb.activated = false
             guildDb.endPremiumTimestamp = 0
             await guildDb.save()
             console.log('Le serveur '.red + guild.name.red + ' n\'est plus premium !'.red)
