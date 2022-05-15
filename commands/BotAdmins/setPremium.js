@@ -64,7 +64,6 @@ module.exports = {
     }
     const guild = client.guilds.cache.get(guildId)
     const guildDb = await client.getGuild(guild)
-    console.log(guildDb)
     if (guildDb) {
       guildDb.premium = toggle
       guildDb.endPremiumTimestamp = Date.now() + time

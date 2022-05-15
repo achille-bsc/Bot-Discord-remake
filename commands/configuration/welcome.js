@@ -48,9 +48,9 @@ module.exports = {
     const langue = guild.langue
 
     if (interaction.options.getSubcommand() === 'activer') {
-      guild.goodByeMessageEnabled = true
-      guild.goodByeChannel = channel.id
-      guild.goodByeMessage = message || guild.goodByeMessage
+      guild.welcomeMessageEnabled = true
+      guild.welcomeChannel = channel.id
+      guild.welcomeMessage = message || guild.goodByeMessage
     }
 
     guild.save().then(() => {
