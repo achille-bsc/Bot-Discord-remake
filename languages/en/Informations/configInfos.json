@@ -1,0 +1,17 @@
+{
+  "title": "Bot configurations",
+  "description": "Informations on the server configurations",
+  "welcome": "Welcome message",
+  "goodbye": "GoodBye message",
+  "premium": "Premium server 🔮",
+  "premiumActive": "Premium activated",
+  "footer": "Asked by",
+
+  "yes": "Yes",
+  "no": "No",
+  "activated": "Activated",
+  "desactivated": "Desactivated",
+
+  "erreurTitle": "Error",
+  "erreurDescription": "An error occurred while saving the configuration. Please try again later.\nIf the problem persists, please contact an administrator."
+}

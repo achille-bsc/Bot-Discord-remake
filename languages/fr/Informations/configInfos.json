@@ -1,0 +1,17 @@
+{
+  "title": "Configurations du bot",
+  "description": "Informations sur les configurations du serveur",
+  "welcome": "Message de bienvenue",
+  "goodbye": "Message de Au Revoir",
+  "premium": "Serveur Premium 🔮",
+  "premiumActive": "Premium activé",
+  "footer": "Demandé par",
+
+  "yes": "Oui",
+  "no": "Non",
+  "activated": "Activé",
+  "desactivated": "Désactivé",
+
+  "erreurTitle": "Erreur",
+  "erreurDescription": "Une erreur est survenue lors de la sauvegarde de la configuration. Veuillez réessayer ultérieurement.\nSi le problème persiste, veuilleze contactez un administrateur."
+}

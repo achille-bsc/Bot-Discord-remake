@@ -1,0 +1,9 @@
+{
+  "amountOutOfPatern": "The amount of messages to delete have to be between 1 and 100",
+  "targetDeleted1": "I deleted",
+  "targetDeleted2": "message on the user",
+  "targetDeleted3": "in the channel",
+
+  "erreurTitle": "Error",
+  "erreurDescription": "An error occurred while saving the configuration. Please try again later.\nIf the problem persists, please contact an administrator."
+}

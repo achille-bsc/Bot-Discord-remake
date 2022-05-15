@@ -10,8 +10,6 @@ module.exports = {
   usage: 'goodbye',
   examples: ['goodbye'],
   category: 'configuration',
-  async run (client, message, args) {
-  },
   options: [
     {
       name: 'activer',

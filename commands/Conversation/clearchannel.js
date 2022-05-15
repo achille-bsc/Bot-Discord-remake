@@ -1,4 +1,6 @@
 const { MessageEmbed } = require('discord.js')
+const langFr = require('../../languages/fr/conversation/clearchannel.json')
+const langEn = require('../../languages/en/conversation/clearchannel.json')
 
 module.exports = {
   name: 'clearchannel',
@@ -8,27 +10,27 @@ module.exports = {
   usage: 'clearchannel',
   examples: ['clearchannel'],
   category: 'conversation',
-  async run (client, message, args) {
-
-  },
   options: [],
   async runInteraction (client, interaction) {
+    const guild = client.getGuild(interaction.guild)
+    const lang = guild.langue === 'fr' ? langFr : langEn
+
     const embed = new MessageEmbed()
       .setColor('#4ED5F8')
-      .setTitle('Réinitialisation du salon')
-      .setDescription('Le salon est en cour de réinitialisation, veuillez patienter...')
+      .setTitle(`${lang.embedTitle}`)
+      .setDescription(`${lang.embedDescription}`)
       .setTimestamp()
-      .setFooter({ text: `Demandé par ${interaction.member.user.username}`, iconURL: interaction.member.user.displayAvatarURL() })
+      .setFooter({ text: `${lang.embedFooter} ${interaction.member.user.username}`, iconURL: interaction.member.user.displayAvatarURL() })
 
     interaction.reply({ embeds: [embed] })
     const channel = await interaction.channel.clone()
     await interaction.channel.delete()
     const success = new MessageEmbed()
       .setColor('#4ED5F8')
-      .setTitle('Réinitialisation du salon')
-      .setDescription('Le salon a été réinitialisé avec succès !')
+      .setTitle(`${lang.embedTitle}`)
+      .setDescription(`${lang.succesDescription}`)
       .setTimestamp()
-      .setFooter({ text: `Demandé par ${interaction.member.user.username}`, iconURL: interaction.member.user.displayAvatarURL() })
+      .setFooter({ text: `${lang.embedFooter} ${interaction.member.user.username}`, iconURL: interaction.member.user.displayAvatarURL() })
 
     channel.send({ embeds: [success] })
   }

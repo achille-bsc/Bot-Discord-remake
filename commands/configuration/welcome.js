@@ -10,8 +10,6 @@ module.exports = {
   usage: 'welcome',
   examples: ['welcome'],
   category: 'configuration',
-  async run (client, message, args) {
-  },
   options: [
     {
       name: 'activer',

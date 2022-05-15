@@ -1,5 +1,8 @@
 const { MessageEmbed } = require('discord.js')
 const config = require('../../config.json')
+const langFr = require('../../languages/fr/Informations/getPremium.json')
+const langEn = require('../../languages/en/Informations/getPremium.json')
+
 module.exports = {
   name: 'getpremium',
   description: 'Donne des infos sur la configuration du bot',
@@ -8,31 +11,19 @@ module.exports = {
   usage: 'infos',
   examples: ['infos'],
   category: 'informations',
-  async run (client, message, args) {
-    const pingEmbed = new MessageEmbed()
-      .setColor('#4ED5F8')
-      .setTitle('Informations Premium')
-      .setDescription('Vous pouvez aquerir le premium du bot en rejoignant le [serveur support](https://discord.gg/M23bbRgxQH)')
-      .addField('Prix 7 jours', `\`${config.weekPrice}€\``, true)
-      .addField('Prix 28 jours', `\`${config.monthPrice}€\``, true)
-      .addField('Prix 6 x 30 jours', `\`${config.monthPrice}€\``, true)
-      .addField('Prix 12 x 30 jours an', `\`${config.yearPrice}€\``, true)
-      .setTimestamp()
-
-    await message.channel.send({ embeds: [pingEmbed] })
-    await message.delete()
-  },
   options: [],
-
   async runInteraction (client, interaction) {
+    const guild = await client.getGuild(interaction.guild)
+    const lang = guild.langue === 'fr' ? langFr : langEn
+
     const pingEmbed = new MessageEmbed()
       .setColor('#4ED5F8')
-      .setTitle('Informations Premium')
-      .setDescription('Vous pouvez aquerir le premium du bot en rejoignant le [serveur support](https://discord.gg/M23bbRgxQH)')
-      .addField('Prix 7 jours', `\`${config.weekPrice}€\``, true)
-      .addField('Prix 28 jours', `\`${config.monthPrice}€\``, true)
-      .addField('Prix 6 x 30 jours', `\`${config.monthPrice}€\``, true)
-      .addField('Prix 12 x 30 jours an', `\`${config.yearPrice}€\``, true)
+      .setTitle(lang.title)
+      .setDescription(lang.description)
+      .addField(`${lang.sevenDays}`, `\`${config.weekPrice}€\``, true)
+      .addField(`${lang.aMonth}`, `\`${config.monthPrice}€\``, true)
+      .addField(`${lang.sixMonths}`, `\`${config.monthPrice}€\``, true)
+      .addField(`${lang.aYear}`, `\`${config.yearPrice}€\``, true)
       .setTimestamp()
 
     await interaction.reply({ embeds: [pingEmbed] })

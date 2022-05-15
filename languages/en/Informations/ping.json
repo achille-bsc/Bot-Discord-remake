@@ -1,0 +1,12 @@
+{
+  "title": "Bot latency",
+  "description": "Here are the informations on the latency of the bot and it hosting",
+  "latence": "Latency",
+  "calcul": "Calculation in progress",
+  "ram": "Usable RAM",
+  "disk": "Usable disk space",
+  "footer": "Asked by",
+
+  "erreurTitle": "Error",
+  "erreurDescription": "An error occurred while saving the configuration. Please try again later.\nIf the problem persists, please contact an administrator."
+}

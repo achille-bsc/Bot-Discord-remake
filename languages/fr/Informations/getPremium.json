@@ -1,0 +1,11 @@
+{
+  "title": "Informations Premium",
+  "description": "Vous pouvez aquerir le premium du bot en rejoignant le [serveur support](https://discord.gg/M23bbRgxQH)",
+  "sevenDays": "Prix pour 7 jours",
+  "aMonth": "Prix pour 28 jours",
+  "sixMonths": "prix for 6 mois (6x30 jours)",
+  "aYear": "Prix pour un an (12x30 jours)",
+
+  "erreurTitle": "Erreur",
+  "erreurDescription": "Une erreur est survenue lors de la sauvegarde de la configuration. Veuillez réessayer ultérieurement.\nSi le problème persiste, veuilleze contactez un administrateur."
+}

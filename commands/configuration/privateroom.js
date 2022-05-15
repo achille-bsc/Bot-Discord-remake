@@ -10,8 +10,6 @@ module.exports = {
   usage: 'privateroom <channel Name>',
   examples: ['privateroom Salons Privés'],
   category: 'configuration',
-  async run (client, message, args) {
-  },
   options: [
     {
       name: 'salon',

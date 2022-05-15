@@ -1,0 +1,10 @@
+{
+  "embedTitle": "Channel reset",
+  "embedDescription": "The channel is reseting, please wait ⏲️",
+  "embedFooter": "Asked by",
+
+  "succesDescription": "The room has been successfully reset!",
+
+  "erreurTitle": "Error",
+  "erreurDescription": "An error occurred while saving the configuration. Please try again later.\nIf the problem persists, please contact an administrator."
+}

@@ -1,4 +1,6 @@
 const { MessageEmbed } = require('discord.js')
+const langFr = require('../../languages/fr/Informations/ping.json')
+const langEn = require('../../languages/en/Informations/ping.json')
 
 module.exports = {
   name: 'ping',
@@ -8,58 +10,24 @@ module.exports = {
   usage: 'ping',
   examples: ['ping'],
   category: 'informations',
-  async run (client, message, args) {
-    const pingEmbed = new MessageEmbed()
-      .setColor('#4ED5F8')
-      .setTitle('Latence du bot')
-      .setDescription('Voici les informations sur la latence du bot ainsi que sur son hébergement.')
-      .addFields(
-        { name: 'Latence BOT', value: '`Calcule en cours...`', inline: true },
-        { name: 'Latence API', value: `\`${Math.round(client.ws.ping)}\`ms`, inline: true },
-        { name: 'Total', value: '`Calcul en cours...`', inline: true },
-        { name: 'RAM utilisable', value: '`512 MG`', inline: true },
-        { name: 'Espace disque utilisable', value: '`1GB`', inline: true }
-      )
-      .setTimestamp()
-      .setFooter({ text: `Demandé par ${message.author.tag}`, avatarURL: `${message.author.displayAvatarURL()}` })
-
-    const messagePing = await message.reply({ embeds: [pingEmbed] })
-
-    await wait(1)
-
-    const botPing = messagePing.createdTimestamp - message.createdTimestamp
-    const pingEmbedEdited = new MessageEmbed()
-      .setColor('#4ED5F8')
-      .setTitle('Latence du bot')
-      .setDescription('Voici les informations sur la latence du bot ainsi que sur son hébergement.')
-      .addFields(
-        { name: 'Latence BOT', value: `\`${botPing}\`ms`, inline: true },
-        { name: 'Latence API', value: `\`${Math.round(client.ws.ping)}\`ms`, inline: true },
-        { name: 'Total', value: `\`${botPing + Math.round(client.ws.ping)}\``, inline: true },
-        { name: 'RAM utilisable', value: '`512 MG`', inline: true },
-        { name: 'Espace disque utilisable', value: '`1GB`', inline: true }
-      )
-      .setTimestamp()
-      .setFooter({ text: `Demandé par ${message.author.tag}`, avatarURL: `${message.author.displayAvatarURL()}` })
-
-    messagePing.edit({ embeds: [pingEmbedEdited] })
-  },
   options: [],
-
   async runInteraction (client, interaction) {
+    const guild = await client.getGuild(interaction.guild)
+    const lang = guild.langue === 'fr' ? langFr : langEn
+
     const pingEmbed = new MessageEmbed()
       .setColor('#4ED5F8')
-      .setTitle('Latence du bot')
-      .setDescription('Voici les informations sur la latence du bot ainsi que sur son hébergement.')
+      .setTitle(lang.title)
+      .setDescription(lang.description)
       .addFields(
-        { name: 'Latence BOT', value: '`Calcul en cours...`', inline: true },
-        { name: 'Latence API', value: `\`${Math.round(client.ws.ping)}\`ms`, inline: true },
+        { name: `${lang.latence} > BOT`, value: `\`${lang.calcul}\``, inline: true },
+        { name: `${lang.latence} > API`, value: `\`${Math.round(client.ws.ping)}\`ms`, inline: true },
         { name: 'Total', value: '`Calcul en cours...`', inline: true },
-        { name: 'RAM utilisable', value: '`512`MG', inline: true },
-        { name: 'Espace disque utilisable', value: '`1`GB', inline: true }
+        { name: `${lang.ram}`, value: '`512`MG', inline: true },
+        { name: `${lang.disk}`, value: '`1`GB', inline: true }
       )
       .setTimestamp()
-      .setFooter({ text: `Demandé par ${interaction.member.tag}`, avatarURL: `${interaction.member.displayAvatarURL()}` })
+      .setFooter({ text: `${lang.footer} ${interaction.member.tag}`, avatarURL: `${interaction.member.displayAvatarURL()}` })
 
     const messagePing = await interaction.reply({ embeds: [pingEmbed], ephemeral: false, fetchReply: true })
 
@@ -68,17 +36,17 @@ module.exports = {
     const botPing = messagePing.createdTimestamp - interaction.createdTimestamp
     const pingEmbedEdited = new MessageEmbed()
       .setColor('#4ED5F8')
-      .setTitle('Latence du bot')
-      .setDescription('Voici les informations sur la latence du bot ainsi que sur son hébergement.')
+      .setTitle(lang.title)
+      .setDescription(lang.description)
       .addFields(
-        { name: 'Latence BOT', value: `\`${botPing}\`ms`, inline: true },
-        { name: 'Latence API', value: `\`${Math.round(client.ws.ping)}\`ms`, inline: true },
+        { name: `${lang.latence} > BOT`, value: `\`${botPing}\`ms`, inline: true },
+        { name: `${lang.latence} > API`, value: `\`${Math.round(client.ws.ping)}\`ms`, inline: true },
         { name: 'Total', value: `\`${botPing + Math.round(client.ws.ping)}\`ms`, inline: true },
-        { name: 'RAM utilisable', value: '`512`MG', inline: true },
-        { name: 'Espace disque utilisable', value: '`1`GB', inline: true }
+        { name: `${lang.ram}`, value: '`512`MG', inline: true },
+        { name: `${lang.disk}`, value: '`1`GB', inline: true }
       )
       .setTimestamp()
-      .setFooter({ text: `Demandé par ${interaction.member.tag}`, avatarURL: `${interaction.member.displayAvatarURL()}` })
+      .setFooter({ text: `${lang.footer} ${interaction.member.tag}`, avatarURL: `${interaction.member.displayAvatarURL()}` })
 
     interaction.editReply({ embeds: [pingEmbedEdited], ephemeral: false })
   }

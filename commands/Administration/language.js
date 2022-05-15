@@ -8,8 +8,6 @@ module.exports = {
   usage: 'langue <langue>',
   examples: ['langue fr'],
   category: 'configuration',
-  async run (client, message, args) {
-  },
   options: [
     {
       name: 'langue',

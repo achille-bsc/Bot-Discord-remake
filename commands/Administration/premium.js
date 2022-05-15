@@ -10,8 +10,6 @@ module.exports = {
   usage: 'premium <on/off>',
   examples: ['premium on', 'premium off'],
   category: 'Administration',
-  async run (client, message, args) {
-  },
   options: [
     {
       name: 'option',

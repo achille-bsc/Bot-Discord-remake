@@ -5,6 +5,25 @@ module.exports = {
     const dbGuild = await client.getGuild(newState.guild)
 
     if (dbGuild.privateRooms.includes(newState.channelId)) {
+      if (dbGuild.rooms.includes(oldState.channelId)) {
+        const channel = oldState.guild.channels.cache.get(oldState.channelId)
+        if (channel.members?.size === 0) {
+          setTimeout(async () => {
+            channel.delete().then(async () => {
+              for (const channelID of dbGuild.rooms) {
+                if (channelID === oldState.channelId) {
+                  dbGuild.rooms = dbGuild.rooms.splice(channelID)
+                  await dbGuild.save()
+                }
+              }
+            })
+          }, dbGuild.roomsDeleteTimeInSec * 1000)
+        }
+
+      // setTimeout(() => {
+      //   channel.delete()
+      // }, 25000)
+      }
       const channel = newState.guild.channels.cache.get(newState.channelId)
       const parent = channel.parent
       const guild = channel.guild
@@ -19,14 +38,15 @@ module.exports = {
       const channel = oldState.guild.channels.cache.get(oldState.channelId)
       if (channel.members?.size === 0) {
         setTimeout(async () => {
-          channel.delete()
-          for (const channelID of dbGuild.rooms) {
-            if (channelID === oldState.channelId) {
-              dbGuild.rooms = dbGuild.rooms.splice(channelID)
-              await dbGuild.save()
+          channel.delete().then(async () => {
+            for (const channelID of dbGuild.rooms) {
+              if (channelID === oldState.channelId) {
+                dbGuild.rooms = dbGuild.rooms.splice(channelID)
+                await dbGuild.save()
+              }
             }
-          }
-        }, dbGuild.roomsDeleteTimeInSec * 1000)
+          }, dbGuild.roomsDeleteTimeInSec * 1000)
+        })
       }
 
       // setTimeout(() => {

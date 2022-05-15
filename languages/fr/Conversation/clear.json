@@ -1,0 +1,9 @@
+{
+  "amountOutOfPatern": "Le nombre de messages doit être compris entre 1 et 100",
+  "targetDeleted1": "J'ai supprimé",
+  "targetDeleted2": "messages sur l'utilisateur",
+  "targetDeleted3": "dans le salon",
+
+  "erreurTitle": "Erreur",
+  "erreurDescription": "Une erreur est survenue lors de la sauvegarde de la configuration. Veuillez réessayer ultérieurement.\nSi le problème persiste, veuilleze contactez un administrateur."
+}

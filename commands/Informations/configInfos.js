@@ -1,45 +1,32 @@
 const { MessageEmbed } = require('discord.js')
+const langFr = require('../../languages/fr/Informations/configInfos.json')
+const langEn = require('../../languages/en/Informations/configInfos.json')
 
 module.exports = {
-  name: 'infos',
+  name: 'configinfos',
   description: 'Donne des infos sur la configuration du bot',
   permissions: ['SEND_MESSAGES'],
   ownerOnly: false,
   usage: 'infos',
   examples: ['infos'],
   category: 'informations',
-  async run (client, message, args) {
-    const guild = await client.getGuild(message.guild)
-
-    const pingEmbed = new MessageEmbed()
-      .setColor('#4ED5F8')
-      .setTitle('Latence du bot')
-      .setDescription('Informations sur les configurations du serveur')
-      .addField('Message de bienvenue', `\`${guild.welcomeMessageEnabled ? 'Activé' : 'Désactivé'}\``, true)
-      .addField('Message de Au Revoir', `\`${guild.goodByeMessageEnabled ? 'Activé' : 'Désactivé'}\``, true)
-      .addField('Serveur Premium', `**\`${guild.premium ? 'Oui' : 'Non'}\`**`, true)
-      .addField('Premium Activé', `**\`${(guild.premium && guild.activated) ? 'Oui' : 'Non'}\`**`, true)
-      .setTimestamp()
-
-    await message.channel.send({ embeds: [pingEmbed] })
-    await message.delete()
-  },
   options: [],
 
   async runInteraction (client, interaction) {
     const guild = await client.getGuild(interaction.guild)
+    const lang = guild.langue === 'fr' ? langFr : langEn
 
     const pingEmbed = new MessageEmbed()
       .setColor('#4ED5F8')
-      .setTitle('Latence du bot')
-      .setDescription('Informations sur les configurations du serveur')
-      .addField('Message de bienvenue', `\`${guild.welcomeMessageEnabled ? 'Activé' : 'Désactivé'}\``, true)
-      .addField('Message de Au Revoir', `\`${guild.goodByeMessageEnabled ? 'Activé' : 'Désactivé'}\``, true)
-      .addField('Serveur Premium', `**\`${guild.premium ? 'Oui' : 'Non'}\`**`, true)
-      .addField('Premium Activé', `**\`${(guild.premium && guild.activated) ? 'Oui' : 'Non'}\`**`, true)
+      .setTitle(lang.title)
+      .setDescription(lang.description)
+      .addField(lang.welcome, `\`${guild.welcomeMessageEnabled ? lang.activated : lang.desactivated}\``, true)
+      .addField(lang.goodbye, `\`${guild.goodByeMessageEnabled ? lang.activated : lang.desactivated}\``, true)
+      .addField(lang.premium, `**\`${guild.premium ? lang.yes : lang.no}\`**`, true)
+      .addField(lang.premiumActive, `**\`${(guild.premium && guild.activated) ? lang.yes : lang.no}\`**`, true)
       .setTimestamp()
-      .setFooter({ text: `Demandé par ${interaction.member.user.tag}`, avatarURL: `${interaction.member.user.displayAvatarURL(true)}` })
+      .setFooter({ text: `${lang.footer} ${interaction.member.user.tag}`, avatarURL: `${interaction.member.user.displayAvatarURL(true)}` })
 
-    await interaction.reply({ embeds: [pingEmbed] })
+    await interaction.reply({ embeds: [pingEmbed], ephemeral: true })
   }
 }
