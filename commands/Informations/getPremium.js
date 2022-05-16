@@ -6,7 +6,7 @@ const langEn = require('../../languages/en/Informations/getPremium.json')
 module.exports = {
   name: 'getpremium',
   description: 'Donne des infos sur la configuration du bot',
-  permissions: ['SEND_MESSAGES'],
+  permissions: ['VIEW_CHANNEL'],
   ownerOnly: false,
   usage: 'infos',
   examples: ['infos'],

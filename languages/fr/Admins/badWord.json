@@ -1,0 +1,14 @@
+{
+  "listTitle": "Liste des mots interdits",
+  "footer": "Demandé par",
+
+  "addTitle": "Mot(s) ajoutés",
+  "addDescription1": "Les mots",
+  "addDescription2": "ont correctement été ajoutés à la liste des mots interdits !",
+
+  "removeTitle": "Mot(s) retirés",
+  "removeDescription1": "Les mots",
+  "removeDescription2": "ont correctement été retirés à la liste des mots interdits !",
+
+  "activeTitle": "Auto-Modéraction activée !"
+}

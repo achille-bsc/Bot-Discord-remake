@@ -1,5 +1,7 @@
 {
   "adminsOnly": "Just bot Administrators can use this command",
   "perms1": "You don't have the require perm(s)",
-  "perms2": "to type this command"
+  "perms2": "to type this command",
+  "autoModErreur1": "It is **forbidden** to write",
+  "autoModErreur2": "on this server!"
 }

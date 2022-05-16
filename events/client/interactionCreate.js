@@ -6,6 +6,12 @@ module.exports = {
   name: 'interactionCreate',
   once: false,
   async execute (client, interaction) {
+    // Commands deleting
+    // console.log(interaction.commandId)
+    // const devGuild1 = await client.guilds.cache.get('848598227301040159')
+    // devGuild1.commands.delete(interaction.commandId) //
+    // client.application.commands.delete(interaction.commandId)
+
     const guild = await client.getGuild(interaction.guild)
     const lang = guild.langue === 'fr' ? langFr : langEn
 

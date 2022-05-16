@@ -29,7 +29,11 @@ const guildSchema = mongoose.Schema({
   roomsDeleteTimeInSec: { type: Number, default: 0 },
 
   // LANGUAGE
-  langue: { type: String, default: 'fr' }
+  langue: { type: String, default: 'fr' },
+
+  // AUTO MODÉRATION
+  autoModActive: { type: Boolean, default: false },
+  badWords: { type: Array, default: [] }
 
 })
 

@@ -12,7 +12,7 @@ module.exports = {
   category: 'conversation',
   options: [],
   async runInteraction (client, interaction) {
-    const guild = client.getGuild(interaction.guild)
+    const guild = await client.getGuild(interaction.guild)
     const lang = guild.langue === 'fr' ? langFr : langEn
 
     const embed = new MessageEmbed()

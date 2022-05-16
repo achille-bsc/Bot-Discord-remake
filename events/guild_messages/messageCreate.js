@@ -13,6 +13,18 @@ module.exports = {
     if (message.author.bot) return
     let guildSettings = await client.getGuild(message.guild)
 
+    const guildBadWords = guild.badWords
+
+    for (const word of guildBadWords) {
+      if (message.content.includes(word)) {
+        message.channel.send(`<@${message.author.id}>\n${lang.autoModErreur1} \`${word}\` ${lang.autoModErreur2}`)
+        setTimeout(() => {
+          message.delete()
+        }, 5000)
+        return
+      }
+    }
+
     if (!guildSettings) {
       await client.createGuild(message.guild)
       guildSettings = await client.getGuild(message.guild)

@@ -5,7 +5,7 @@ const langEn = require('../../languages/en/Informations/ping.json')
 module.exports = {
   name: 'ping',
   description: 'Donne la lantence du bot ainsi que quelques informations détaillés part rapport à son hébergement',
-  permissions: ['SEND_MESSAGES'],
+  permissions: ['VIEW_CHANNEL'],
   ownerOnly: false,
   usage: 'ping',
   examples: ['ping'],
