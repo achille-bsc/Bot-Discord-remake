@@ -1,9 +1,12 @@
 const { MessageEmbed } = require('discord.js')
+const langFr = require('../../languages/fr/events/guildMemberRemove.json')
+const langEn = require('../../languages/en/events/guildMemberRemove.json')
 module.exports = {
   name: 'guildMemberRemove',
   once: false,
   async execute (client, member) {
     const guild = await client.getGuild(member.guild)
+    const lang = guild.langue === 'fr' ? langFr : langEn
 
     if (guild.goodByeMessageEnabled) {
       let description = guild.goodByeMessage.replace('{member}'.toLowerCase(), member.user.username)
@@ -13,7 +16,7 @@ module.exports = {
         .setColor(guild.goodByeColor)
         .setDescription(description)
         .setTimestamp()
-        .setFooter({ text: 'L\'utilisateur à rejoint !' })
+        .setFooter({ text: `${lang.footer}` })
 
       const logChannel = client.channels.cache.get(guild.goodByeChannel)
 

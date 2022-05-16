@@ -1,9 +1,14 @@
 const ownerid = '688098375697956905'
+const langFr = require('../../languages/fr/events/interactionCreate.json')
+const langEn = require('../../languages/en/events/interactionCreate.json')
 
 module.exports = {
   name: 'interactionCreate',
   once: false,
   async execute (client, interaction) {
+    const guild = await client.getGuild(interaction.guild)
+    const lang = guild.langue === 'fr' ? langFr : langEn
+
     if (interaction.isCommand() || interaction.isContextMenu()) {
       // let guildSettings = client.getGuild(interaction.guild)
 
@@ -14,10 +19,10 @@ module.exports = {
 
       const cmd = client.commands.get(interaction.commandName)
 
-      if (!cmd) return interaction.reply('Cette commande n\'existe pas !')
+      if (!cmd) return interaction.reply(lang.commandDontExist)
 
       if (cmd.ownerOnly) {
-        if (interaction.user.id !== ownerid) return interaction.reply('Seuls les Administrateurs du bot peuvent utiliser cette commande')
+        if (interaction.user.id !== ownerid) return interaction.reply(lang.adminsOnly)
       }
 
       if (!interaction.member.permissions.has([cmd.permissions])) return interaction.reply({ content: `Vous n'avez pas la/les permission(s) requise(s) (\`${cmd.permissions.join(', ')}\`) pour tapper cette commande`, ephemeral: true })
@@ -32,7 +37,7 @@ module.exports = {
     } else if (interaction.isSelectMenu()) {
       const selectMenu = client.selects.get(interaction.customId)
 
-      if (!selectMenu) return interaction.reply('Ce Menu n\'existe pas !')
+      if (!selectMenu) return interaction.reply(lang.menu)
       selectMenu.runInteraction(client, interaction)
     }
   }

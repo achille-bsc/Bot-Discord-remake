@@ -1,10 +1,15 @@
 const prefix = '!'
 const ownerid = '688098375697956905'
+const langFr = require('../../languages/fr/events/messageCreate.json')
+const langEn = require('../../languages/en/events/messageCreate.json')
 
 module.exports = {
   name: 'messageCreate',
   once: false,
   async execute (client, message) {
+    const guild = await client.getGuild(message.guild)
+    const lang = guild.langue === 'fr' ? langFr : langEn
+
     if (message.author.bot) return
     let guildSettings = await client.getGuild(message.guild)
 
@@ -21,10 +26,10 @@ module.exports = {
     const cmd = client.commands.get(cmdName)
     if (!cmd) return
     if (cmd.ownerOnly) {
-      if (message.author.id !== ownerid) return message.reply('Seuls les Administrateurs du bot peuvent utiliser cette commande')
+      if (message.author.id !== ownerid) return message.reply(`${lang.adminsOnly}`)
     }
 
-    if (!message.member.permissions.has([cmd.permissions])) return message.reply(`Vous n'avez pas la/les permission(s) requise(s) (\`${cmd.permissions.join(', ')}\`) pour tapper cette commande`)
+    if (!message.member.permissions.has([cmd.permissions])) return message.reply(`${lang.perms1} (\`${cmd.permissions.join(', ')}\`) ${lang.perms2}`)
 
     if (cmd) {
       cmd.run(client, message, args)

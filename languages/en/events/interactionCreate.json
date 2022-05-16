@@ -1,0 +1,5 @@
+{
+  "commandDontExist": "This command doesn't exit!",
+  "adminsOnly": "Only bot administrators can use this command!",
+  "menu": "This menu doesn't exist!"
+}
