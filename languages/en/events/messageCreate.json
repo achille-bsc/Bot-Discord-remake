@@ -1,4 +1,9 @@
 {
+  "trueTitle": "Slash commands have been successfully activated",
+  "falseTitle": "Slash commands have been successfully desactivated",
+
+  "footer": "Asked by",
+  
   "adminsOnly": "Just bot Administrators can use this command",
   "perms1": "You don't have the require perm(s)",
   "perms2": "to type this command",

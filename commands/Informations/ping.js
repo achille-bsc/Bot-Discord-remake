@@ -53,5 +53,5 @@ module.exports = {
 }
 
 function wait (waitsecs = 5) {
-  return new Promise(resolve => setTimeout(resolve, waitsecs * 1000))
+  return new Promise(resolve => setTimeout(resolve, waitsecs))
 }

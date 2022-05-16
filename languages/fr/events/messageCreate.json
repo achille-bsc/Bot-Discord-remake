@@ -1,4 +1,9 @@
 {
+  "trueTitle": "Les slash commands ont correctement été activés",
+  "falseTitle": "Les slash commands ont correctement été desactivés",
+
+  "footer": "Demandé par",
+
   "adminsOnly": "Seuls les Administrateurs du bot peuvent utiliser cette commande",
   "perms1": "Vous n'avez pas la/les permission(s) requise(s)",
   "perms2": "pour tapper cette commande",

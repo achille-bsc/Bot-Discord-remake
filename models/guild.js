@@ -33,7 +33,10 @@ const guildSchema = mongoose.Schema({
 
   // AUTO MODÉRATION
   autoModActive: { type: Boolean, default: false },
-  badWords: { type: Array, default: [] }
+  badWords: { type: Array, default: [] },
+
+  // slash
+  slash: { type: Array, default: [] }
 
 })
 
