@@ -16,7 +16,7 @@ module.exports = {
     const lang = guild.langue === 'fr' ? langFr : langEn
 
     const pingEmbed = new MessageEmbed()
-      .setColor('#4ED5F8')
+      .setColor('BLURPLE')
       .setTitle(lang.title)
       .setDescription(lang.description)
       .addFields(
@@ -35,7 +35,7 @@ module.exports = {
 
     const botPing = messagePing.createdTimestamp - interaction.createdTimestamp
     const pingEmbedEdited = new MessageEmbed()
-      .setColor('#4ED5F8')
+      .setColor('BLURPLE')
       .setTitle(lang.title)
       .setDescription(lang.description)
       .addFields(

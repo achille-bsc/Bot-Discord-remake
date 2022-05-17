@@ -16,7 +16,7 @@ module.exports = {
     const lang = guild.langue === 'fr' ? langFr : langEn
 
     const embed = new MessageEmbed()
-      .setColor('#4ED5F8')
+      .setColor('BLURPLE')
       .setTitle(`${lang.embedTitle}`)
       .setDescription(`${lang.embedDescription}`)
       .setTimestamp()
@@ -26,7 +26,7 @@ module.exports = {
     const channel = await interaction.channel.clone()
     await interaction.channel.delete()
     const success = new MessageEmbed()
-      .setColor('#4ED5F8')
+      .setColor('BLURPLE')
       .setTitle(`${lang.embedTitle}`)
       .setDescription(`${lang.succesDescription}`)
       .setTimestamp()

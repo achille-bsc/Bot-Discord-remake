@@ -17,7 +17,7 @@ module.exports = {
     const lang = guild.langue === 'fr' ? langFr : langEn
 
     const pingEmbed = new MessageEmbed()
-      .setColor('#4ED5F8')
+      .setColor('BLURPLE')
       .setTitle(lang.title)
       .setDescription(lang.description)
       .addField(lang.welcome, `\`${guild.welcomeMessageEnabled ? lang.activated : lang.desactivated}\``, true)

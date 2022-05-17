@@ -13,7 +13,7 @@ module.exports = {
       description = description.replace('{membercount}'.toLowerCase(), member.guild.memberCount)
       const embed = new MessageEmbed()
         .setAuthor({ name: `${member.user.tag} (${member.id})`, iconURL: member.user.displayAvatarURL() })
-        .setColor(guild.goodByeColor)
+        .setColor('RED')
         .setDescription(description)
         .setTimestamp()
         .setFooter({ text: `${lang.footer}` })
