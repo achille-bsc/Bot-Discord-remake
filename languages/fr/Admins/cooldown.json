@@ -1,0 +1,8 @@
+{
+  "title": "Cooldown définit",
+  "description1": "Le cooldown du serveur à correctement été définit sur",
+  "description2": "secondes",
+
+  "erreurTitle": "Erreur",
+  "erreurDescription": "Une erreur est survenue lors de la sauvegarde de la configuration. Veuillez réessayer ultérieurement.\nSi le problème persiste, veuilleze contactez un administrateur."
+}

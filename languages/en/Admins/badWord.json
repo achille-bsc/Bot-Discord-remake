@@ -1,6 +1,7 @@
 {
     "listTitle": "List of forbidden words",
     "footer": "Asked by",
+    "noWords": "no words",
 
     "addTitle": "Words added",
     "addDescription1": "The words",
@@ -9,6 +10,8 @@
     "removeTitle": "Words removed",
     "removeDescription1": "The words",
     "removeDescription2": "were succefully removed to the list of forbidden words words",
+
+    "notAdded": "could not be added because they are already present in the list",
 
     "activeTitle": "Auto-Moderaction activated !"
 }

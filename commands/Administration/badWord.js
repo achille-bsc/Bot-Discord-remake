@@ -9,7 +9,7 @@ module.exports = {
   ownerOnly: false,
   usage: 'welcome',
   examples: ['welcome'],
-  category: 'configuration',
+  category: 'Auto-Modération',
   options: [
     {
       name: 'active',
@@ -76,13 +76,20 @@ module.exports = {
     if (interaction.options.getSubcommand() === 'add') {
       let words = (interaction.options.getString('mots'))
       words = words.split(', ')
+      const addedWords = []
+      const notAddedWords = []
       for (const word of words) {
+        if (guild.badWords.includes(word)) {
+          notAddedWords.push(word)
+          continue
+        }
+        addedWords.push(word)
         await guild.badWords.push(`${word}`)
       }
       guild.save().then(() => {
         const Addembed = new MessageEmbed()
           .setTitle(lang.addTitle)
-          .setDescription(`${lang.addDescription1} \`${words.join('`, `')}\` ${lang.addDescription2}`)
+          .setDescription(`${lang.addDescription1} \`${addedWords.join('`, `') || lang.noWords}\` ${lang.addDescription2}\n\n${lang.addDescription1} \`${notAddedWords.join('`, `') || ' '}\` ${lang.notAdded}`)
           .setColor('BLURPLE')
           .setFooter({ text: `${lang.footer} ${interaction.member.user.tag}`, avatarURL: `${interaction.member.user.displayAvatarURL(true)}` })
 

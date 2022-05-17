@@ -1,0 +1,8 @@
+{
+  "title": "Cooldown defined",
+  "description1": "The server's cooldown has correctly been setup on",
+  "description2": "desconds",
+
+  "erreurTitle": "Error",
+  "erreurDescription": "An error occurred while saving the configuration. Please try again later.\nIf the problem persists, please contact an administrator."
+}

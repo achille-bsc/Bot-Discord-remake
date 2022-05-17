@@ -7,7 +7,7 @@ module.exports = {
   ownerOnly: false,
   usage: 'langue <langue>',
   examples: ['langue fr'],
-  category: 'configuration',
+  category: 'Langues',
   options: [
     {
       name: 'langue',

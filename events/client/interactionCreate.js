@@ -28,7 +28,7 @@ module.exports = {
       if (!cmd) return interaction.reply(lang.commandDontExist)
 
       if (cmd.ownerOnly) {
-        if (interaction.user.id !== ownerid) return interaction.reply(lang.adminsOnly)
+        if (interaction.user.id !== ownerid) return interaction.reply({ content: lang.adminsOnly, ephemeral: true })
       }
 
       if (!interaction.member.permissions.has([cmd.permissions])) return interaction.reply({ content: `Vous n'avez pas la/les permission(s) requise(s) (\`${cmd.permissions.join(', ')}\`) pour tapper cette commande`, ephemeral: true })
