@@ -24,6 +24,7 @@ module.exports = {
 
     interaction.reply({ embeds: [embed] })
     const channel = await interaction.channel.clone()
+    if (channel.type === 'GUILD_STORE') return console.log('salon de règlement')
     await interaction.channel.delete()
     const success = new MessageEmbed()
       .setColor('BLURPLE')

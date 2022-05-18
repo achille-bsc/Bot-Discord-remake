@@ -1,0 +1,10 @@
+{
+  "trueTitle": "Slash commands have been successfully activated",
+  "falseTitle": "Slash commands have been successfully desactivated",
+  "replyEmbed": "🕰️ Please wait",
+  "replyDescription": "The operation may take some time",
+
+  "title": "The ccommands were correctly been desactivated!",
+
+  "footer": "Asked by"
+}

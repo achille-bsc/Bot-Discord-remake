@@ -1,4 +1,6 @@
 const { MessageEmbed } = require('discord.js')
+const langFr = require('../../languages/fr/Admins/langue.json')
+const langEn = require('../../languages/en/Admins/langue.json')
 
 module.exports = {
   name: 'langue',
@@ -24,7 +26,14 @@ module.exports = {
   async runInteraction (client, interaction) {
     const guild = await client.getGuild(interaction.guild)
     const langue = interaction.options.getString('langue')
+    const lang = guild.langue === 'fr' ? langFr : langEn
 
+    const everInThisLangueEmbed = new MessageEmbed()
+      .setTitle(`${lang.everInThisLangueEmbedTitle}`)
+      .setColor('GREEN')
+      .setDescription(`${lang.everInThisLangueEmbedDescription}`)
+
+    if (guild.langue === langue) return interaction.reply({ embeds: [everInThisLangueEmbed], ephemeral: true })
     guild.langue = langue
     await guild.save()
 

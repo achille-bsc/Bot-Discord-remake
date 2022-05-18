@@ -1,5 +1,4 @@
-const { MessageEmbed, Interaction } = require('discord.js')
-const config = require('../../config.json')
+const { MessageEmbed } = require('discord.js')
 const langFr = require('../../languages/fr/Admins/cooldown.json')
 const langEn = require('../../languages/en/Admins/cooldown.json')
 

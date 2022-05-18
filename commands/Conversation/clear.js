@@ -52,7 +52,7 @@ module.exports = {
       })
 
       await channelToDelete.bulkDelete(filteredTargetMessages, true).then(messages => {
-        interaction.reply({ content: `${lang.targetDeleted1} ${messages.size} ${messages.size > 1 ? 'messages' : 'message'} ${lang.targetDeleted2} \`${target}\` ${lang.targetDeleted3} <#${channelToDelete.id}>`, ephemeral: true })
+        interaction.reply({ content: `${lang.targetDeleted1} ${messages.size} ${messages.size > 1 ? 'messages' : 'message'} ${lang.targetDeleted2} ${target} ${lang.targetDeleted3} <#${channelToDelete.id}>`, ephemeral: true })
       })
     } else {
       await channelToDelete.bulkDelete(amountToDelete, true).then(messages => {

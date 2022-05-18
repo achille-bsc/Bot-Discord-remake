@@ -71,7 +71,7 @@ module.exports = {
         .setColor('BLURPLE')
         .setFooter({ text: `${lang.footer} ${interaction.member.user.tag}`, avatarURL: `${interaction.member.user.displayAvatarURL(true)}` })
 
-      interaction.reply({ embeds: [embed], ephemeral: false })
+      interaction.reply({ embeds: [embed], ephemeral: true })
     }
     if (interaction.options.getSubcommand() === 'add') {
       let words = (interaction.options.getString('mots'))
@@ -89,7 +89,7 @@ module.exports = {
       guild.save().then(() => {
         const Addembed = new MessageEmbed()
           .setTitle(lang.addTitle)
-          .setDescription(`${lang.addDescription1} \`${addedWords.join('`, `') || lang.noWords}\` ${lang.addDescription2}\n\n${lang.addDescription1} \`${notAddedWords.join('`, `') || ' '}\` ${lang.notAdded}`)
+          .setDescription(`${lang.addDescription1} \`${addedWords.join('`, `') || lang.noWords}\` ${lang.addDescription2}${notAddedWords.length > 0 ? `\n\n${lang.addDescription1} \`${notAddedWords.join('`, `') || `${lang.noWords}`}\` ${lang.notAdded}` : ''}`)
           .setColor('BLURPLE')
           .setFooter({ text: `${lang.footer} ${interaction.member.user.tag}`, avatarURL: `${interaction.member.user.displayAvatarURL(true)}` })
 

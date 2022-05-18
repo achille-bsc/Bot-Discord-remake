@@ -2,6 +2,8 @@
   "trueTitle": "Slash commands have been successfully activated",
   "falseTitle": "Slash commands have been successfully desactivated",
 
+  "cooldown": "You need to wait before typing an other message!",
+
   "footer": "Asked by",
   
   "adminsOnly": "Just bot Administrators can use this command",

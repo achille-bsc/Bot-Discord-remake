@@ -1,0 +1,67 @@
+const { MessageEmbed } = require('discord.js')
+
+const langFr = require('../../languages/fr/Admins/slash.json')
+const langEn = require('../../languages/en/Admins/slash.json')
+
+const { REST } = require('@discordjs/rest')
+const { Routes } = require('discord-api-types/v9')
+
+module.exports = {
+  name: 'slash',
+  description: 'permet de gérer les commandes slash',
+  permissions: ['ADMINISTRATOR'],
+  ownerOnly: false,
+  usage: 'slash <update/off>',
+  examples: ['premium update', 'premium off'],
+  category: 'Configuration',
+  options: [
+    {
+      name: 'update',
+      description: 'met à jours les slash commands du serveur',
+      type: 'SUB_COMMAND'
+    },
+    {
+      name: 'off',
+      description: 'desactive les slash commandes du serveur',
+      type: 'SUB_COMMAND'
+    }
+
+  ],
+  async runInteraction (client, interaction) {
+    const guild = await client.getGuild(interaction.guild)
+    const lang = guild.langue === 'fr' ? langFr : langEn
+
+    if (interaction.options.getSubcommand() === 'update') {
+      const guildObject = await client.guilds.cache.get(interaction.guild.id)
+      await guildObject.commands.set(client.commands.map(cmd => cmd))
+      guild.save().then(async () => {
+        const embed = new MessageEmbed()
+          .setTitle(lang.trueTitle)
+          .setColor('GREEN')
+          .setFooter({ text: `${lang.footer} ${interaction.member.tag}`, avatarURL: `${interaction.member.displayAvatarURL(true)}` })
+        await interaction.reply({ embeds: [embed] })
+      })
+    } else if (interaction.options.getSubcommand() === 'off') {
+      const embedReply = new MessageEmbed()
+        .setTitle(`${lang.replyEmbed}`)
+        .setDescription(`${lang.replyDescription}`)
+        .setColor('YELLOW')
+      await interaction.reply({ embeds: [embedReply] })
+      const token = process.env.YMULE
+      const clientId = process.env.CLIENT_ID
+      const guildId = interaction.guild.id
+
+      const rest = new REST({ version: '9' }).setToken(token)
+      rest.get(Routes.applicationGuildCommands(clientId, guildId))
+        .then(async data => {
+          const promises = []
+          for (const command of data) {
+            const deleteUrl = `${Routes.applicationGuildCommands(clientId, guildId)}/${command.id}`
+            promises.push(rest.delete(deleteUrl))
+          }
+
+          return Promise.all(promises)
+        })
+    }
+  }
+}
