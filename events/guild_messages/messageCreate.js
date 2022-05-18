@@ -15,7 +15,7 @@ module.exports = {
     const guildBadWords = guild.badWords
 
     for (const word of guildBadWords) {
-      if (message.content.includes(word)) {
+      if (message.content.includes(' ' + word || word + ' ')) {
         message.channel.send(`<@${message.author.id}>\n${lang.autoModErreur1} \`${word}\` ${lang.autoModErreur2}`)
         setTimeout(() => {
           message.delete()
