@@ -29,7 +29,7 @@ module.exports = async (client) => {
     })
 
     client.commands.set(cmd.name, cmd)
-    console.log(`${cmd.name}`.blue, '=> ' + 'Chargées'.green)
+    console.log(`${cmd.name}`.blue, '=> ' + 'Chargée'.green)
   })
   console.log('\n')
 }
