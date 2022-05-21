@@ -53,7 +53,7 @@ module.exports = {
     }
 
     if (message.author.id === message.guild.ownerId) {
-      if (message.content === '!slash on') {
+      if (message.content === '!slash') {
         const guildObject = await client.guilds.cache.get(message.guild.id)
         await guildObject.commands.set(client.commands.map(cmd => cmd))
         guild.save().then(async () => {

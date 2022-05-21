@@ -6,5 +6,7 @@
   "succesDescription": "The room has been successfully reset!",
 
   "erreurTitle": "Error",
-  "erreurDescription": "An error occurred while saving the configuration. Please try again later.\nIf the problem persists, please contact an administrator."
+  "erreurDescription": "An error occurred while saving the configuration. Please try again later.\nIf the problem persists, please contact an administrator.",
+  "guildStoreErrorDescription": "An error occurred while executing the command because the bot cannot clear a channel required by community mode. You must disable it in order to use the command"
+
 }

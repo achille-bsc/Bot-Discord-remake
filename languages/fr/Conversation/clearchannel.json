@@ -6,5 +6,6 @@
   "succesDescription": "Le salon a été réinitialisé avec succès !",
 
   "erreurTitle": "Erreur",
-  "erreurDescription": "Une erreur est survenue lors de la sauvegarde de la configuration. Veuillez réessayer ultérieurement.\nSi le problème persiste, veuilleze contactez un administrateur."
+  "erreurDescription": "Une erreur est survenue lors de la sauvegarde de la configuration. Veuillez réessayer ultérieurement.\nSi le problème persiste, veuilleze contactez un administrateur.",
+  "guildStoreErrorDescription": "Une erreur s'est produite lors de l'éxecution de la commande car le bot ne peut pas vider un salon requis par le mode comunautée. Vous devez la désactiver afin d'utiliser la commande"
 }

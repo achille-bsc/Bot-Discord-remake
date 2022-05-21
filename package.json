@@ -1,6 +1,6 @@
 {
-  "name": "getcodeingknow",
-  "version": "pre-Alpha-1.0.0",
+  "name": "ymule-bot",
+  "version": "1.0.0-beta.1",
   "description": "",
   "main": "index.js",
   "scripts": {

@@ -15,6 +15,14 @@ module.exports = {
     const guild = await client.getGuild(interaction.guild)
     const lang = guild.langue === 'fr' ? langFr : langEn
 
+    if (interaction.channel.id === interaction.guild.rulesChannelId) {
+      const embed = new MessageEmbed()
+        .setTitle(`${lang.erreurTitle}`)
+        .setDescription(`${lang.guildStoreErrorDescription}`)
+        .setColor('RED')
+      interaction.reply({ embeds: [embed], ephemeral: true })
+      return
+    }
     const embed = new MessageEmbed()
       .setColor('BLURPLE')
       .setTitle(`${lang.embedTitle}`)
