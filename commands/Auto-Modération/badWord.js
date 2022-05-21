@@ -12,12 +12,12 @@ module.exports = {
   category: 'Auto-Modération',
   options: [
     {
-      name: 'active',
+      name: 'activer',
       description: 'Activer l\'auto-modération',
       type: 'SUB_COMMAND'
     },
     {
-      name: 'desactive',
+      name: 'desactiver',
       description: 'Désactiver l\'auto-modération',
       type: 'SUB_COMMAND'
     },
@@ -120,7 +120,7 @@ module.exports = {
       })
     }
 
-    if (interaction.options.getSubcommand() === 'active') {
+    if (interaction.options.getSubcommand() === 'activer') {
       guild.autoModActive = true
       guild.save().then(() => {
         const embed = new MessageEmbed()
@@ -131,7 +131,7 @@ module.exports = {
         interaction.reply({ embeds: [embed], ephemeral: false })
       })
     }
-    if (interaction.options.getSubcommand() === 'desactive') {
+    if (interaction.options.getSubcommand() === 'desactiver') {
       guild.autoModActive = false
       guild.save().then(() => {
         const embed = new MessageEmbed()
