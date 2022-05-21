@@ -5,9 +5,6 @@ const client = new Client({ intents: 98303 })
 const Logger = require('./utils/logger')
 require('colors')
 
-client.commands = new Collection()
-client.buttons = new Collection()
-
 const X = ['commands', 'buttons', 'selects']
 const handlers = ['EventUtil', 'CommandUtil', 'ButtonUtil', 'SelectUtil']
 require('./utils/Functions')(client)

@@ -4,8 +4,6 @@ const langFr = require('../../languages/fr/events/messageCreate.json')
 const langEn = require('../../languages/en/events/messageCreate.json')
 
 const talkedRecently = new Set()
-const { REST } = require('@discordjs/rest')
-const { Routes } = require('discord-api-types/v9')
 
 module.exports = {
   name: 'messageCreate',
@@ -66,26 +64,6 @@ module.exports = {
           await message.delete()
           await message.channel.send({ embeds: [embed] })
         })
-      } else if (message.content === '!slash off') {
-        const reply = await message.reply('Veuillez patienter. L\'oppération peut prendre un certain temps')
-        const token = process.env.YMULE
-        const clientId = process.env.CLIENT_ID
-        const guildId = message.guild.id
-
-        const rest = new REST({ version: '9' }).setToken(token)
-        rest.get(Routes.applicationGuildCommands(clientId, guildId))
-          .then(data => {
-            const promises = []
-            for (const command of data) {
-              const deleteUrl = `${Routes.applicationGuildCommands(clientId, guildId)}/${command.id}`
-              promises.push(rest.delete(deleteUrl))
-            }
-            return Promise.all(promises)
-          }).then(() => {
-            reply.delete()
-            message.delete()
-            message.channel.send('Les commandes ont correctement été désactivés !')
-          })
       }
     }
   }
