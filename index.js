@@ -5,9 +5,6 @@ const client = new Client({ intents: 98303 })
 const Logger = require('./utils/logger')
 require('colors')
 
-const express = require('express')
-const app = express()
-
 client.commands = new Collection()
 client.buttons = new Collection()
 
@@ -55,7 +52,6 @@ mongoose.connect(process.env.DATABASE_URI, {
   .catch(err => { console.log(`${err}`.bold.red) })
 
 client.login(process.env.TEST)
-app.listen(8080)
 
 /// ////////////////////////////
 // Discord bot pannel handler//
