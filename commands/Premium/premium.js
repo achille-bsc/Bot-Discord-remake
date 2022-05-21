@@ -37,8 +37,7 @@ module.exports = {
   async runInteraction (client, interaction) {
     const guild = await client.getGuild(interaction.guild)
 
-    if (interaction.options.getSubcommand('infos')) {
-      console.log('infos')
+    if (interaction.options.getSubcommand() === 'infos') {
       const langFr = require('../../languages/fr/Informations/getPremium.json')
       const langEn = require('../../languages/en/Informations/getPremium.json')
       const lang = guild.langue === 'fr' ? langFr : langEn
@@ -49,13 +48,12 @@ module.exports = {
         .setDescription(`${lang.description}`)
         .addField(`${lang.sevenDays}`, `\`${config.weekPrice}€\``, true)
         .addField(`${lang.aMonth}`, `\`${config.monthPrice}€\``, true)
-        .addField(`${lang.sixMonths}`, `\`${config.monthPrice}€\``, true)
+        .addField(`${lang.sixMonths}`, `\`${config.sixMonthPrice}€\``, true)
         .addField(`${lang.aYear}`, `\`${config.yearPrice}€\``, true)
         .setTimestamp()
 
       await interaction.reply({ embeds: [pingEmbed] })
-    } else if (interaction.options.getSubcommand('activation')) {
-      console.log('activation')
+    } else if (interaction.options.getSubcommand() === 'activation') {
       const langFr = require('../../languages/fr/Admins/premium.json')
       const langEn = require('../../languages/en/Admins/premium.json')
       const lang = guild.langue === 'fr' ? langFr : langEn

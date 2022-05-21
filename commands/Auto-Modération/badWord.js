@@ -111,7 +111,7 @@ module.exports = {
       }
       guild.save().then(() => {
         const Addembed = new MessageEmbed()
-          .setTitle(lang.addTitle)
+          .setTitle(lang.removeTitle)
           .setDescription(`${lang.removeDescription1} \`${removedWords.join('`, `')}\` ${lang.removeDescription2}`)
           .setFooter({ text: `${lang.footer} ${interaction.member.user.tag}`, avatarURL: `${interaction.member.user.displayAvatarURL(true)}` })
           .setColor('BLURPLE')
@@ -135,7 +135,7 @@ module.exports = {
       guild.autoModActive = false
       guild.save().then(() => {
         const embed = new MessageEmbed()
-          .setTitle(lang.activeTitle)
+          .setTitle(lang.desactiveTitle)
           .setFooter({ text: `${lang.footer} ${interaction.member.user.tag}`, avatarURL: `${interaction.member.user.displayAvatarURL(true)}` })
           .setColor('GREEN')
 

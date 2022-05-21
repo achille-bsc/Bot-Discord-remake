@@ -3,8 +3,8 @@
   "description": "You can get the bot premium by joining the [support server](https://discord.gg/M23bbRgxQH)",
   "sevenDays": "Price for 7 days",
   "aMonth": "Price for 28 days",
-  "sixMonths": "Price for 6 months (6x30 days)",
-  "aYear": "Price for a year (12x30 days)",
+  "sixMonths": "Price for 6 months",
+  "aYear": "Price for one year",
 
   "erreurTitle": "Erreur",
   "erreurDescription": "Une erreur est survenue lors de la sauvegarde de la configuration. Veuillez réessayer ultérieurement.\nSi le problème persiste, veuilleze contactez un administrateur."

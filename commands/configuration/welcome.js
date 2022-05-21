@@ -40,10 +40,10 @@ module.exports = {
   ],
   async runInteraction (client, interaction) {
     const guild = await client.getGuild(interaction.guild)
+    const lang = (guild.langue === 'fr' ? langFr : langEn)
 
     const channel = interaction.options.getChannel('salon')
     const message = interaction.options.getString('message')
-    const langue = guild.langue
 
     if (interaction.options.getSubcommand() === 'activer') {
       guild.welcomeMessageEnabled = true
@@ -53,17 +53,17 @@ module.exports = {
 
     guild.save().then(() => {
       const embedDesactive = new MessageEmbed()
-        .setTitle(`${langue === 'fr' ? langFr.embedTitleCorp : langEn.embedTitleCorp} ${interaction.options.getSubcommand() === 'activer' ? (langue === 'fr' ? langFr.embedTitleActive : langEn.embedTitleActive) + '🔓' : (langue === 'fr' ? langFr.embedTitleDesactive : langEn.embedTitleDesactive) + '🔒'}`)
-        .setDescription(`${interaction.options.getSubcommand() === 'activer' ? (langue === 'fr' ? langFr.embedDescriptionActivated : langEn.embedDescriptionActivated) + ' ✅' : (langue === 'fr' ? langFr.embedDescriptionDesactivated : langEn.embedDescriptionDesactivated) + ' ✅'}`)
+        .setTitle(`${lang.embedTitleCorp} ${interaction.options.getSubcommand() === 'activer' ? (lang.embedTitleActive) + '🔓' : (lang.embedTitleDesactive) + '🔒'}`)
+        .setDescription(`${interaction.options.getSubcommand() === 'activer' ? (lang.embedDescriptionActivated) + ' ✅' : (lang.embedDescriptionDesactivated) + ' ✅'}`)
         .setColor('GREEN')
         .setTimestamp()
-        .setFooter({ text: `${interaction.options.getSubcommand() === 'activer' ? (langue === 'fr' ? langFr.embedFooterActivated : langEn.embedFooterActivated) : (langue === 'fr' ? langFr.embedFooterDesactived : langEn.embedFooterDesactived)}` })
+        .setFooter({ text: `${interaction.options.getSubcommand() === 'activer' ? (lang.embedFooterActivated) : (lang.embedFooterDesactived)}` })
       interaction.reply({ embeds: [embedDesactive], ephemeral: true })
     }).catch((error) => {
       const erreurDesactive = new MessageEmbed()
         .setColor('RED')
-        .setTitle(langue === 'fr' ? langFr.erreurTitle : langEn.erreurTitle)
-        .setDescription(`${langue === 'fr' ? langFr.erreurDescription : langEn.erreurDescription}\n\`\`\`${error}\`\`\``)
+        .setTitle(lang.erreurTitle)
+        .setDescription(`${lang.erreurDescription}\n\`\`\`${error}\`\`\``)
 
       interaction.reply({ embeds: [erreurDesactive], ephemeral: true })
     })

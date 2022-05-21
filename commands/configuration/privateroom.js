@@ -40,75 +40,40 @@ module.exports = {
   ],
   async runInteraction (client, interaction) {
     const guild = await client.getGuild(interaction.guild)
-    const langue = guild.langue
+    const lang = guild.langue === 'fr' ? langFr : langEn
 
     if (interaction.options.getSubcommand() === 'delete') {
       const embed = new MessageEmbed()
         .setTitle('Privaterooms')
-        .setDescription('Veuillez séléctionner le salon de privateRoom que vous souhaitez supprimer')
+        .setDescription(`${lang.deleteEmbedDescription}`)
         .setColor('GREEN')
 
       const row = new MessageActionRow()
         .addComponents(
           new MessageSelectMenu()
             .setCustomId('privateroom')
-            .setPlaceholder('Aucune selection')
+            .setPlaceholder(`${lang.selectNoSelection}`)
         )
       guild.privateRooms.forEach((room) => {
-        const roomName = interaction.guild.channels.cache.get(room)
+        const gotRoom = interaction.guild.channels.cache.get(room)
         row.components[0].addOptions([
           {
-            label: `${roomName}`,
+            label: `${gotRoom.name}`,
             description: 'Privateroom',
             value: `${room}`
           }
         ])
       })
       if (guild.privateRooms < 1) {
-        embed.addField('Aucun salon', 'Vous n\'avez aucun salon privateRooms sur le serveur actuellement')
+        embed.setDescription('')
+        embed.addField(`${lang.deleteEmbedNoChannelFiledName}`, `${lang.deleteEmbedNoChannelFiledValue}`)
         interaction.reply({ embeds: [embed], ephemeral: true })
       } else {
         await interaction.reply({ embeds: [embed], components: [row], ephemeral: true })
       }
-
-      /* reply.awaitMessageComponent({ filter, componentType: 'SELECT_MENU', time: 60000 })
-        .then(async interaction => {
-          const confirmEmbed = new MessageEmbed()
-            .setTitl('Confirmation')
-            .setDescription(`Confirmez -vous la suppression du salon <#${interaction.value}> ?`)
-            .setColor('GREEN')
-          const row = new MessageActionRow()
-            .addComponents(
-              new MessageButton()
-                .setCustomId('yes')
-                .setLabel('Oui')
-                .setStyle('SUCCESS'),
-              new MessageButton()
-                .setCustomId('no')
-                .setLabel('Non')
-                .setStyle('DANGER')
-            )
-          const confirmReply = await interaction.reply({ embeds: [confirmEmbed], components: [row], ephemeral: true })
-          confirmReply.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 60000 })
-            .then(async interaction2 => {
-              if (interaction2.customId === 'yes') {
-                const channel = interaction2.guild.channels.cache.get(interaction.value)
-                await channel.delete()
-
-                const endEmbed = new MessageEmbed()
-                  .setTitle('Salon supprimé')
-                  .setDescription('Le salon <#interaction.value> à correctement été supprimé !')
-                  .setColor('GREEN')
-
-                interaction2.reply({ embeds: [endEmbed], ephemeral: true })
-              }
-            })
-            .catch(() => console.log('No interactions were collected.'))
-        })
-        .catch(() => reply.reply('temps écoulé !')) */
     } else {
       if (guild.privateRooms.length === 0 || (guild.premium && guild.activated)) {
-        const salon = interaction.options.getString('salon').replace('{default}', '➕ Créer votre salon')
+        const salon = interaction.options.getString('salon').replace('{default}', `${guild.langue === 'fr' ? '➕ Créer votre salon' : '➕ Create your channel'}`)
         const time = (guild.premium && guild.activated) ? interaction.options.getNumber('temps') : (interaction.options.getNumber('temps') > 15 ? 15 : interaction.options.getNumber('temps')) || guild.roomsDeleteTimeInSec
         const channel = await interaction.guild.channels.create(salon, { type: 'GUILD_VOICE' })
         await guild.privateRooms.push(`${channel.id}`)
@@ -116,24 +81,24 @@ module.exports = {
 
         guild.save().then(() => {
           const embed = new MessageEmbed()
-            .setTitle(langue === 'fr' ? langFr.embedTitle : langEn.embedTitle)
-            .setDescription(`${langue === 'fr' ? langFr.embedDescrptionPart1 : langEn.embedDescrptionPart1} => <#${channel.id}> ✅\n${langue === 'fr' ? langFr.embedDescriptionPart2 : langEn.embedDescriptionPart2} \`${time}\` ${langue === 'fr' ? langFr.embedDescriptionPart3 : langEn.embedDescriptionPart3}. ${(guild.premium && guild.activated) ? '' : (interaction.options.getNumber('temps') > 15 ? 15 : `(${langue === 'fr' ? langFr.embedDescriptionPart4 : langEn.embedDescriptionPart4} => \`!getPremium\`)`)}`)
+            .setTitle(`${lang.embedTitle}`)
+            .setDescription(`${lang.embedDescrptionPart1} => <#${channel.id}> ✅\n${lang.embedDescriptionPart2} \`${time}\` ${lang.embedDescriptionPart3}.\n*(${(guild.premium && guild.activated) ? '' : lang.embedDescriptionPart4})* => \`!getPremium\`)`)
             .setColor('GREEN')
             .setTimestamp()
           interaction.reply({ embeds: [embed], ephemeral: true })
         }).catch((error) => {
           const erreur = new MessageEmbed()
-            .setTitle(langue === 'fr' ? langFr.erreurTitle : langEn.erreurTitle)
+            .setTitle(lang.erreurTitle)
             .setColor('RED')
-            .setDescription(`${langue === 'fr' ? langFr.erreurDescription : langEn.erreurDescription}\n\`\`\`${error}\`\`\``)
+            .setDescription(`${lang.erreurDescription}\n\`\`\`${error}\`\`\``)
 
           interaction.reply({ embeds: [erreur], ephemeral: true })
         })
       } else {
         const embed = new MessageEmbed()
-          .setTitle(langue === 'fr' ? langFr.erreurPremiumTitle : langEn.erreurPremiumTitle)
+          .setTitle(lang.erreurPremiumTitle)
           .setColor('RED')
-          .setDescription(`${langue === 'fr' ? langFr.erreurPremiumDescription : langEn.erreurPremiumDescription} (\`${guild.prefix}getpremium\`)`)
+          .setDescription(`${lang.erreurPremiumDescription} (\`/getpremium\`)`)
           .setTimestamp()
         interaction.reply({ embeds: [embed], ephemeral: true })
       }

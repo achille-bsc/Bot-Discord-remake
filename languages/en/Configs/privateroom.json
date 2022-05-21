@@ -1,4 +1,11 @@
-{
+{   
+  "deleteEmbedNoChannelFiledName": "No Channel",
+  "deleteEmbedNoChannelFiledValue": "You dont have any privateRoom channel on this server actualy",
+
+  "selectNoSelection": "Aucune selection",
+ 
+  "deleteEmbedDescription": "Please select the privateRoom channel you want to delete",
+
   "embedTitle": "The privateRoom channel has corectly been created",
 
   "embedDescrptionPart1": "The privateRoom channel has succesfully been created",

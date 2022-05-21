@@ -31,7 +31,7 @@ module.exports = {
 
   ],
   async runInteraction (client, interaction) {
-    const guild = client.getGuild(interaction.guild)
+    const guild = await client.getGuild(interaction.guild)
     const lang = guild.langue === 'fr' ? langFr : langEn
 
     const amountToDelete = parseInt(interaction.options.getNumber('messages'))

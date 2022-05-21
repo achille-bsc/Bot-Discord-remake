@@ -13,5 +13,7 @@
 
   "notAdded": "n'ont pas pu être ajoutés car ils sont déjà présents dans la liste",
 
-  "activeTitle": "Auto-Modéraction activée !"
+  "activeTitle": "Auto-Modéraction activée !",
+  "desactiveTitle": "Auto-Modéraction désactivée !"
+
 }

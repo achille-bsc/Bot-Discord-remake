@@ -9,14 +9,16 @@ module.exports = {
         const channel = oldState.guild.channels.cache.get(oldState.channelId)
         if (channel.members?.size === 0) {
           setTimeout(async () => {
-            channel.delete().then(async () => {
-              for (const channelID of dbGuild.rooms) {
-                if (channelID === oldState.channelId) {
-                  dbGuild.rooms = dbGuild.rooms.splice(channelID)
-                  await dbGuild.save()
+            if (channel.members?.size === 0) {
+              await channel.delete().then(async () => {
+                for (const channelID of dbGuild.rooms) {
+                  if (channelID === oldState.channelId) {
+                    dbGuild.rooms = dbGuild.rooms.splice(channelID)
+                    await dbGuild.save()
+                  }
                 }
-              }
-            })
+              })
+            }
           }, dbGuild.roomsDeleteTimeInSec * 1000)
         }
 
@@ -38,15 +40,17 @@ module.exports = {
       const channel = oldState.guild.channels.cache.get(oldState.channelId)
       if (channel.members?.size === 0) {
         setTimeout(async () => {
-          channel.delete().then(async () => {
-            for (const channelID of dbGuild.rooms) {
-              if (channelID === oldState.channelId) {
-                dbGuild.rooms = dbGuild.rooms.splice(channelID)
-                await dbGuild.save()
+          if (channel.members?.size === 0) {
+            await channel.delete().then(async () => {
+              for (const channelID of dbGuild.rooms) {
+                if (channelID === oldState.channelId) {
+                  dbGuild.rooms = dbGuild.rooms.splice(channelID)
+                  await dbGuild.save()
+                }
               }
-            }
-          }, dbGuild.roomsDeleteTimeInSec * 1000)
-        })
+            })
+          }
+        }, dbGuild.roomsDeleteTimeInSec * 1000)
       }
 
       // setTimeout(() => {

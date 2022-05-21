@@ -1,4 +1,11 @@
 {
+  "deleteEmbedNoChannelFiledName": "Aucun salon",
+  "deleteEmbedNoChannelFiledValue": "Vous n'avez aucun salon privateRooms sur le serveur actuellement",
+
+  "selectNoSelection": "Aucune selection",
+
+  "deleteEmbedDescription": "Veuillez séléctionner le salon de privateRoom que vous souhaitez supprimer",
+
   "embedTitle": "Le salon de privateRoom à correctement été créé",
 
   "embedDescrptionPart1": "Le salon de privateRoom a été créé avec succès",
@@ -7,7 +14,7 @@
   "embedDescriptionPart4": "vous devez être premium pour inscrire une durée suppérieure à 15 secondes",
 
   "erreurPremiumTitle": "Erreur",
-  "erreurPremiumDescription": "Vous avez déjà un salon de privateRoom. Vous ne pouvez pas en créer d'autre avant de supprimer celui ou de vous procurer la version prémium",
+  "erreurPremiumDescription": "Vous avez déjà un salon de privateRoom. Vous ne pouvez pas en créer d'autre avant de supprimer celui-ci ou de vous procurer la version prémium",
 
   "erreurTitle": "Erreur",
   "erreurDescription": "Une erreur est survenue lors de la sauvegarde de la configuration. Veuillez réessayer ultérieurement.\nSi le problème persiste, veuilleze contactez un administrateur"

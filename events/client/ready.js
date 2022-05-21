@@ -30,8 +30,9 @@ module.exports = {
     const statuses = [
       'ses engrenages...',
       'Un bon film.',
-      '/help et !help',
       'derrière toi',
+      '/help',
+      'la route',
 			`la version V.${botPackage.version}`,
 			'Achille'
     ]
@@ -55,6 +56,6 @@ module.exports = {
       })
 
       i = ++i % statuses.length
-    }, timeInSec * 10000)
+    }, timeInSec * 1000)
   }
 }
