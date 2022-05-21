@@ -35,9 +35,6 @@ const guildSchema = mongoose.Schema({
   autoModActive: { type: Boolean, default: false },
   badWords: { type: Array, default: [] },
 
-  // slash
-  slash: { type: Array, default: [] },
-
   // COOLDOWN
   cooldownTime: { type: Number, default: 0 }
 
