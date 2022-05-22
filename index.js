@@ -3,6 +3,7 @@ const dotenv = require('dotenv'); dotenv.config()
 const mongoose = require('mongoose')
 const client = new Client({ intents: 98303 })
 const Logger = require('./utils/logger')
+const config = require('./config.json')
 require('colors')
 
 const X = ['commands', 'buttons', 'selects']
@@ -48,7 +49,11 @@ mongoose.connect(process.env.DATABASE_URI, {
 })
   .catch(err => { console.log(`${err}`.bold.red) })
 
-client.login(process.env.YMULE)
+if (config.bot === 'Bot') {
+  client.login(process.env.YMULE)
+} else {
+  client.login(process.env.TEST)
+}
 
 /// ////////////////////////////
 // Discord bot pannel handler//
