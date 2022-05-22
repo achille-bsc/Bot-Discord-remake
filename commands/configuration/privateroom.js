@@ -28,11 +28,18 @@ module.exports = {
           required: true
         },
         {
+          name: 'categorie',
+          description: 'Séléctionnez la catégorie dans la quelle vous voullez que le salons de privateroom apparaisse',
+          type: 'CHANNEL',
+          channelTypes: ['GUILD_CATEGORY'],
+          required: true
+        },
+        {
           name: 'temps',
           description: 'Temps que le salon mettra avant d\'êtree suprimé !',
           type: 'NUMBER',
           minValue: 0,
-          maxValue: 900,
+          maxValue: 3600,
           required: true
         }
       ]
@@ -74,7 +81,7 @@ module.exports = {
     } else {
       if (guild.privateRooms.length === 0 || (guild.premium && guild.activated)) {
         const salon = interaction.options.getString('salon').replace('{default}', `${guild.langue === 'fr' ? '➕ Créer votre salon' : '➕ Create your channel'}`)
-        const time = (guild.premium && guild.activated) ? (interaction.options.getNumber('temps') > 3600 ? 3600 : interaction.options.getNumber('temps')) : ((interaction.options.getNumber('temps') > 15 ? 15 : interaction.options.getNumber('temps'))) || guild.roomsDeleteTimeInSec
+        const time = (guild.premium && guild.activated) ? interaction.options.getNumber('temps') : ((interaction.options.getNumber('temps') > 15 ? 15 : interaction.options.getNumber('temps'))) || guild.roomsDeleteTimeInSec
         const channel = await interaction.guild.channels.create(salon, {
           type: 'GUILD_VOICE',
           permissionOverwrites: [
@@ -82,7 +89,8 @@ module.exports = {
               id: interaction.guild.roles.everyone,
               allow: [Permissions.FLAGS.CONNECT]
             }
-          ]
+          ],
+          parent: interaction.options.getChannel('categorie')
         })
         await guild.privateRooms.push(`${channel.id}`)
         guild.roomsDeleteTimeInSec = time
