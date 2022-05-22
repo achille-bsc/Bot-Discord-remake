@@ -74,7 +74,7 @@ module.exports = {
     } else {
       if (guild.privateRooms.length === 0 || (guild.premium && guild.activated)) {
         const salon = interaction.options.getString('salon').replace('{default}', `${guild.langue === 'fr' ? '➕ Créer votre salon' : '➕ Create your channel'}`)
-        const time = (guild.premium && guild.activated) ? interaction.options.getNumber('temps') : (interaction.options.getNumber('temps') > 15 ? 15 : interaction.options.getNumber('temps')) || guild.roomsDeleteTimeInSec
+        const time = (guild.premium && guild.activated) ? (interaction.options.getNumber('temps') > 3600 ? 3600 : interaction.options.getNumber('temps')) : ((interaction.options.getNumber('temps') > 15 ? 15 : interaction.options.getNumber('temps'))) || guild.roomsDeleteTimeInSec
         const channel = await interaction.guild.channels.create(salon, { type: 'GUILD_VOICE' })
         await guild.privateRooms.push(`${channel.id}`)
         guild.roomsDeleteTimeInSec = time
