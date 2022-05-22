@@ -1,3 +1,4 @@
+const { Permissions } = require('discord.js')
 module.exports = {
   name: 'voiceStateUpdate',
   once: false,
@@ -30,7 +31,15 @@ module.exports = {
       const parent = channel.parent
       const guild = channel.guild
       const member = guild.members.cache.get(newState.id)
-      const createdChannel = await guild.channels.create(`Salon de ${member.user.username}`, { type: 'GUILD_VOICE' })
+      const createdChannel = await guild.channels.create(`Salon de ${member.user.username}`, {
+        type: 'GUILD_VOICE',
+        permissionOverwrites: [
+          {
+            id: member,
+            allow: [Permissions.FLAGS.CONNECT, Permissions.FLAGS.MOVE_MEMBERS, Permissions.FLAGS.MUTE_MEMBERS, Permissions.FLAGS.PRIORITY_SPEAKER, Permissions.FLAGS.SPEAK, Permissions.FLAGS.DEAFEN_MEMBERS]
+          }
+        ]
+      })
       createdChannel.setParent(parent)
       dbGuild.rooms.push(`${createdChannel.id}`)
       dbGuild.save().then(() => {
