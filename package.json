@@ -1,7 +1,7 @@
 {
   "name": "ymule-bot",
-  "version": "1.0.0-beta.2",
-  "betaVerions": "-beta.2",
+  "version": "1.0.0-beta.2.0.1",
+  "betaVerions": "-beta.2.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
