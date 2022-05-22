@@ -1,5 +1,5 @@
-const langFr = require('../../languages/fr/conversation/clear.json')
-const langEn = require('../../languages/en/conversation/clear.json')
+const langFr = require('../../languages/fr/Conversation/clear.json')
+const langEn = require('../../languages/en/Conversation/clear.json')
 
 module.exports = {
   name: 'clear',

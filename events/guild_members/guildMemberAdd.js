@@ -21,7 +21,9 @@ module.exports = {
 
       const welcomeChannel = client.channels.cache.get(guild.welcomeChannel)
 
-      welcomeChannel.send({ embeds: [embed] })
+      try {
+        welcomeChannel.send({ embeds: [embed] })
+      } catch (error) {}
     }
   }
 }

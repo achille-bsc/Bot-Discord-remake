@@ -1,6 +1,6 @@
 const { MessageEmbed } = require('discord.js')
-const langFr = require('../../languages/fr/conversation/clearchannel.json')
-const langEn = require('../../languages/en/conversation/clearchannel.json')
+const langFr = require('../../languages/fr/Conversation/clearchannel.json')
+const langEn = require('../../languages/en/Conversation/clearchannel.json')
 
 module.exports = {
   name: 'clearchannel',

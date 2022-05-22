@@ -20,7 +20,9 @@ module.exports = {
 
       const logChannel = client.channels.cache.get(guild.goodByeChannel)
 
-      logChannel.send({ embeds: [embed] })
+      try {
+        logChannel.send({ embeds: [embed] })
+      } catch (error) {}
     }
   }
 }
