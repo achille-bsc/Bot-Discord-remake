@@ -1,12 +1,12 @@
 const { MessageEmbed } = require('discord.js')
 
 module.exports = {
-  name: 'configinfos',
-  description: 'Donne des infos sur la configuration du bot',
+  name: 'support',
+  description: 'Envoit  un lien vers  le serveur support',
   permissions: ['VIEW_CHANNEL'],
   ownerOnly: false,
-  usage: 'infos',
-  examples: ['infos'],
+  usage: 'support',
+  examples: ['support'],
   category: 'informations',
   options: [],
 
