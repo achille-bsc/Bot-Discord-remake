@@ -53,7 +53,7 @@ module.exports = {
     const guildDb = await client.getGuild(guild)
     if (guildDb) {
       guildDb.premium = toggle
-      guildDb.endPremiumTimestamp = Date.now() + time
+      guildDb.endPremiumTimestamp = guildDb.endPremiumTimestamp + Date.now() + time
       guildDb.activated = false
       guildDb.save().then(() => {
         interaction.reply({ content: `Le serveur **${guild.name}** ${toggle ? 'est maintenant premium !' : 'n\'est maintenant plus premium !'}`, ephemeral: true })
