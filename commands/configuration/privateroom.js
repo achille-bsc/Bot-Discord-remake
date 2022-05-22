@@ -22,7 +22,7 @@ module.exports = {
       type: 'SUB_COMMAND',
       options: [
         {
-          name: 'salon',
+          name: 'name',
           description: 'Nom du salon de privateroom',
           type: 'STRING',
           required: true
