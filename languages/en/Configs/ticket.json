@@ -1,0 +1,7 @@
+{
+  "messageTitle": "Open a ticket",
+  "button": "Open a ticket",
+
+  "erreurTitle": "Error",
+  "erreurDescription": "An error occurred while saving the configuration. Please try again later.\nIf the problem persists, please contact an administrator."
+}

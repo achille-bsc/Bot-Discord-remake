@@ -36,7 +36,13 @@ const guildSchema = mongoose.Schema({
   badWords: { type: Array, default: [] },
 
   // COOLDOWN
-  cooldownTime: { type: Number, default: 0 }
+  cooldownTime: { type: Number, default: 0 },
+
+  // TICKET
+  ticketActivated: { type: Boolean, default: false },
+  openMessage: { type: String, default: 'Ticket ouvert !' },
+  ticketCategorie: { type: String, default: '' },
+  ticketsCount: { type: Number, default: 1 }
 
 })
 
