@@ -1,5 +1,7 @@
 {
   "commandDontExist": "Cette commande n'existe pas",
   "adminsOnly": "Seuls les Administrateurs du bot peuvent utiliser cette commande",
-  "menu": "Ce Menu n'existe pas !"
+  "menu": "Ce Menu n'existe pas !",
+  "buttonTicketEmbedTitle": "✅ Ticket ouvert !",
+  "buttonCloseTicket": "Fermer le Ticket"
 }
