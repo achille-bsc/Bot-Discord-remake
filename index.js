@@ -49,7 +49,7 @@ mongoose.connect(process.env.DATABASE_URI, {
 })
   .catch(err => { console.log(`${err}`.bold.red) })
 
-if (config.bot === 'Bot') {
+if (config.bot) {
   client.login(process.env.YMULE)
 } else {
   client.login(process.env.TEST)

@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'close-ticket',
+  name: 'closeTicket',
   async runInteraction (client, interaction) {
     interaction.channel.delete()
   }

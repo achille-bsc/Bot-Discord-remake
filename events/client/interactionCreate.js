@@ -15,6 +15,9 @@ module.exports = {
     const guild = await client.getGuild(interaction.guild)
     const lang = guild.langue === 'fr' ? langFr : langEn
 
+    const btnArgs = interaction.customId.split(/ +/g)
+    const btnSystemName = btnArgs[0]
+
     if (interaction.isCommand() || interaction.isContextMenu()) {
       // let guildSettings = client.getGuild(interaction.guild)
 
@@ -36,15 +39,15 @@ module.exports = {
       cmd.runInteraction(client, interaction)
     } else if (interaction.isButton()) {
       if (interaction.customId.startsWith('roleadd-')) { '../../buttons/other/addrole-button.js'.runInteraction(client, interaction) }
-      const btn = client.buttons.get(interaction.customId)
+      const btn = client.buttons.get(btnSystemName)
 
       if (!btn) return console.log('Le boutton n\'a pas été trouvé !')
-      btn.runInteraction(client, interaction)
+      btn.runInteraction(client, interaction, btnArgs)
     } else if (interaction.isSelectMenu()) {
-      const selectMenu = client.selects.get(interaction.customId)
+      const selectMenu = client.selects.get(btnSystemName)
 
       if (!selectMenu) return interaction.reply(lang.menu)
-      selectMenu.runInteraction(client, interaction)
+      selectMenu.runInteraction(client, interaction, btnArgs)
     }
   }
 }
