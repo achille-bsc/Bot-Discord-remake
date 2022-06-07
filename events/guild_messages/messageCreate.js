@@ -7,6 +7,20 @@ module.exports = {
   name: 'messageCreate',
   once: false,
   async execute (client, message) {
+<<<<<<< HEAD
+=======
+    let guild = await client.getGuild(message.guild)
+    if (!guild || guild === null) {
+      try {
+        guild = await client.createGuild(guild)
+        client.updateGuild(guild)
+      } catch (err) {}
+      guild = await client.getGuild(message.guild)
+    }
+    console.log(guild)
+    const lang = guild.langue === 'fr' ? langFr : langEn
+
+>>>>>>> 97db5c6f5b5aad486238f52711a7bd834d70148c
     if (message.author.bot) return
 
     let guild = await client.getGuild(message.guild)

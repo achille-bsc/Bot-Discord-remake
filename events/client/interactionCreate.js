@@ -15,6 +15,9 @@ module.exports = {
     const guild = await client.getGuild(interaction.guild)
     const lang = guild.langue === 'fr' ? langFr : langEn
 
+    const btnArgs = interaction.customId.split(/ +/g)
+    const btnSystemName = btnArgs[0]
+
     if (interaction.isCommand() || interaction.isContextMenu()) {
       // let guildSettings = client.getGuild(interaction.guild)
 
@@ -36,20 +39,28 @@ module.exports = {
       cmd.runInteraction(client, interaction)
     } else if (interaction.isButton()) {
       if (interaction.customId.startsWith('roleadd-')) { '../../buttons/other/addrole-button.js'.runInteraction(client, interaction) }
+<<<<<<< HEAD
       const btn = client.buttons.get(interaction.customId.split('-')[0])
+=======
+      const btn = client.buttons.get(btnSystemName)
+>>>>>>> 97db5c6f5b5aad486238f52711a7bd834d70148c
 
       if (!btn) return console.log('Le boutton n\'a pas été trouvé !')
-      btn.runInteraction(client, interaction)
+      btn.runInteraction(client, interaction, btnArgs)
     } else if (interaction.isSelectMenu()) {
-      const selectMenu = client.selects.get(interaction.customId)
+      const selectMenu = client.selects.get(btnSystemName)
 
       if (!selectMenu) return interaction.reply(lang.menu)
+<<<<<<< HEAD
       selectMenu.runInteraction(client, interaction)
     } else if (interaction.isModalSubmit) {
       const modal = client.modals.get(interaction.customId.split('-')[0])
 
       if (!modal) return interaction.reply(lang.menu)
       modal.runInteraction(client, interaction)
+=======
+      selectMenu.runInteraction(client, interaction, btnArgs)
+>>>>>>> 97db5c6f5b5aad486238f52711a7bd834d70148c
     }
   }
 }

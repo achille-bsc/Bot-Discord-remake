@@ -1,5 +1,50 @@
+<<<<<<< HEAD
 // const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js')
-// const { morpion3x3, morpion4x4 } = require('../../utils/handlers/MorpionUtil')
+const { morpion3x3 } = require('../../utils/handlers/MorpionUtil')
+
+module.exports = {
+  name: 'morpion',
+  description: 'Permet de jouer au morpion contre le bot',
+  permissions: ['VIEW_CHANNEL'],
+  ownerOnly: false,
+  usage: 'morpion',
+  examples: ['morpion'],
+  category: 'jeux',
+  options: [
+    {
+      name: 'grille',
+      description: 'Taille de la grille sur la quelle vous souhaitez jouer',
+      type: 'STRING',
+      required: true,
+      choices: [
+        { name: '3x3', value: '3' },
+        { name: '4x4', value: '4' }
+      ]
+    },
+    {
+      name: 'niveau',
+      description: 'Niveau du bot contre le quel vous allez jouer',
+      type: 'STRING',
+      required: true,
+      choices: [
+        { name: 'Facile', value: '1' },
+        { name: 'Normal', value: '2' },
+        { name: 'Difficile', value: '3' }
+      ]
+    }
+
+  ],
+  async runInteraction (client, interaction) {
+    const grille = interaction.options.getString('grille')
+    const level = interaction.options.getString('niveau')
+
+    morpion3x3(interaction, level, grille)
+  }
+
+}
+=======
+// // const { MessageEmbed, MessageActionRow, MessageButton } = require('discord.js')
+// const { morpion3x3 } = require('../../utils/handlers/MorpionUtil')
 
 // module.exports = {
 //   name: 'morpion',
@@ -9,122 +54,36 @@
 //   usage: 'morpion',
 //   examples: ['morpion'],
 //   category: 'jeux',
-//   async run (client, message, args) {
-//     message.delete()
-//     const embed = new MessageEmbed()
-//       .setTitle('Morpion')
-//       .setDescription('Sur quelle grille souhaitez-vous jouer ?')
-//       .setColor('#0099ff')
-
-//     const row = new MessageActionRow()
-//       .addComponents(
-//         new MessageButton()
-//           .setCustomId('3')
-//           .setLabel('3x3')
-//           .setStyle('SUCCESS')
-
-//       )
-//       .addComponents(
-//         new MessageButton()
-//           .setCustomId('4')
-//           .setLabel('4x4')
-//           .setStyle('DANGER')
-
-//       )
-
-//     const reply = await message.channel.send({ embeds: [embed], components: [row] })
-
-//     const filter = i => {
-//       i.deferUpdate()
-//       return i.user.id === message.author.id
+//   options: [
+//     {
+//       name: 'grille',
+//       description: 'Taille de la grille sur la quelle vous souhaitez jouer',
+//       type: 'STRING',
+//       required: true,
+//       choices: [
+//         { name: '3x3', value: '3' },
+//         { name: '4x4', value: '4' }
+//       ]
+//     },
+//     {
+//       name: 'niveau',
+//       description: 'Niveau du bot contre le quel vous allez jouer',
+//       type: 'STRING',
+//       required: true,
+//       choices: [
+//         { name: 'Facile', value: '1' },
+//         { name: 'Normal', value: '2' },
+//         { name: 'Difficile', value: '3' }
+//       ]
 //     }
 
-//     reply.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 60000 })
-//       .then(async interaction => {
-//         if (interaction.customId === '3') {
-//           interaction.message.delete()
-//           const embed = new MessageEmbed()
-//             .setTitle('Morpion')
-//             .setDescription('Quelle niveau souhaitez-vous ?')
-//             .setColor('#0099ff')
+//   ],
+//   async runInteraction (client, interaction) {
+//     const grille = interaction.options.getString('grille')
+//     const level = interaction.options.getString('niveau')
 
-//           const row = new MessageActionRow()
-//             .addComponents(
-//               new MessageButton()
-//                 .setCustomId('1')
-//                 .setLabel('Facile')
-//                 .setStyle('SUCCESS')
-
-//             )
-//             .addComponents(
-//               new MessageButton()
-//                 .setCustomId('3')
-//                 .setLabel('Difficile')
-//                 .setStyle('DANGER')
-//             )
-
-//           const reply = await message.channel.send({ embeds: [embed], components: [row] })
-
-//           const filter = i => {
-//             i.deferUpdate()
-//             return i.user.id === message.author.id
-//           }
-
-//           reply.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 60000 })
-//             .then(async interaction => {
-//               const level = parseInt(interaction.customId)
-//               let gmode = ''
-//               if (level === 1) {
-//                 gmode = 'Facile'
-//               } else if (level === 3) {
-//                 gmode = 'Difficile'
-//               }
-//               morpion3x3(message, level, gmode)
-//             })
-//         } else if (interaction.customId === '4') {
-//           interaction.message.delete()
-//           const embed = new MessageEmbed()
-//             .setTitle('Morpion')
-//             .setDescription('Quelle niveau souhaitez-vous ?')
-//             .setColor('#0099ff')
-
-//           const row = new MessageActionRow()
-//             .addComponents(
-//               new MessageButton()
-//                 .setCustomId('1')
-//                 .setLabel('Facile')
-//                 .setStyle('SUCCESS')
-
-//             )
-//             .addComponents(
-//               new MessageButton()
-//                 .setCustomId('3')
-//                 .setLabel('Difficile')
-//                 .setStyle('DANGER')
-//             )
-
-//           const reply = await message.channel.send({ embeds: [embed], components: [row] })
-
-//           const filter = i => {
-//             i.deferUpdate()
-//             return i.user.id === message.author.id
-//           }
-
-//           reply.awaitMessageComponent({ filter, componentType: 'BUTTON', time: 60000 })
-//             .then(async interaction => {
-//               const level = parseInt(interaction.customId)
-//               let gmode = ''
-//               if (level === 1) {
-//                 gmode = 'Facile'
-//               } else if (level === 3) {
-//                 gmode = 'Difficile'
-//               }
-
-//               morpion4x4(message, level, gmode)
-//             })
-//         }
-//       })
-//       .catch(() => null)
+//     morpion3x3(interaction, level, grille)
 //   }
 
 // }
+>>>>>>> 97db5c6f5b5aad486238f52711a7bd834d70148c
