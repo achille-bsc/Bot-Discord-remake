@@ -1,0 +1,15 @@
+{
+  "successEmbedTitle": "Le membre a été banni avec succès !",
+  "successEmbedDescription1": "Le membre",
+  "successEmbedDescription2": "a été banni avec succès !",
+
+  "time": "durée",
+  "noTime": "Illimitée",
+  "day": "jour",
+  "days": "jours",
+
+  "reason": "raison",
+
+  "erreurTitle": "Erreur",
+  "erreurDescription": "Une erreur est survenue lors du bannissement du membre. il est possible que je n'ai pas le permissions de bannir les membres.\nSi le probleme perssiste, vous pouvez contacter un administrateur sur le [support](https://discord.gg/M23bbRgxQH)"
+}

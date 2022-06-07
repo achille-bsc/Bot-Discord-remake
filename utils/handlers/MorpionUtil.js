@@ -25,12 +25,9 @@
 //   4, 3, 3, 4,
 //   4, 3, 3, 4,
 //   8, 4, 4, 8
-// ] // Fonctionne !
+// ]
 
-// // win function 4x4
 // function checkWin (type) {
-//   // Tableau de toutes les possibilités de victoire
-//   // Tableau de toutes les possibilités de victoire
 //   const WinSituation4 = [
 //     [0, 1, 2],
 //     [1, 2, 3],
@@ -57,6 +54,7 @@
 //     [6, 9, 12],
 //     [7, 10, 13]
 //   ]
+
 //   const WinSituation3 = [
 //     [0, 1, 2],
 //     [3, 4, 5],
@@ -70,7 +68,7 @@
 //     [6, 4, 2]
 //   ]
 
-//   for (const situation of (type === '4' ? WinSituation4 : WinSituation3)) {
+//   for (const situation of (type === '4' ? WinSituation4 : (type === '3' ? WinSituation3 : null))) {
 //     const RowValues = []
 
 //     // vérifier la victoire
@@ -107,6 +105,8 @@
 //   if (depth <= 0) return evaluate(newGrid)
 
 //   const availables = newGrid.filter((a) => typeof a === 'number')
+
+//   // TODO: Modifier le système qui set une valeur à une place vide pour check si ça fais le coup de placer ici, car il reset la valeur initial à chaque tour ce que fais que ça ne change jamais, donc la valeur choisit par défaut sera celle choisie par la fonction evaluate
 
 //   if (player === '⭕') {
 //     let score = -Infinity
@@ -156,7 +156,7 @@
 
 //     )
 
-//   console.log((grid === gridQuatre ? (typeof grid[4] === 'number' ? grid[4] + 1 : grid[4]) : (typeof grid[3] === 'number' ? grid[3] + 1 : grid[3])))
+//   // console.log((grid === gridQuatre ? (typeof grid[4] === 'number' ? grid[4] + 1 : grid[4]) : (typeof grid[3] === 'number' ? grid[3] + 1 : grid[3])))
 
 //   const row2 = new MessageActionRow()
 //     .addComponents(
@@ -241,8 +241,8 @@
 //   }
 // }
 
-// // ----- MORPION 3x3 ----- //
-
+// // ----- MORPION ----- //
+// // TODO: Modifier la fonction d'éxécution d'une partie de morpion
 // async function morpion3x3 (message, level, gmode) {
 //   level = 5
 

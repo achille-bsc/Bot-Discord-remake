@@ -35,7 +35,7 @@ module.exports = {
     const row = new MessageActionRow()
       .addComponents(
         new MessageButton()
-          .setCustomId('close-ticket')
+          .setCustomId('closeTicket')
           .setLabel(`${lang.buttonCloseTicket}`)
           .setStyle('DANGER')
       )

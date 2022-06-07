@@ -30,12 +30,13 @@ module.exports = {
 
     if (interaction.options.getSubcommand() === 'update') {
       const guildObject = await client.guilds.cache.get(interaction.guild.id)
+      interaction.deferReply()
       await guildObject.commands.set(client.commands.map(cmd => cmd))
       const embed = new MessageEmbed()
         .setTitle(`${lang.trueTitle}`)
         .setColor('GREEN')
         .setFooter({ text: `${lang.footer} ${interaction.member.tag}`, avatarURL: `${interaction.member.displayAvatarURL(true)}` })
-      await interaction.reply({ embeds: [embed] })
+      await interaction.editReply({ embeds: [embed] })
     } else if (interaction.options.getSubcommand() === 'off') {
       interaction.guild.commands.set([])
       const embed = new MessageEmbed()

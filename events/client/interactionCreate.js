@@ -36,7 +36,7 @@ module.exports = {
       cmd.runInteraction(client, interaction)
     } else if (interaction.isButton()) {
       if (interaction.customId.startsWith('roleadd-')) { '../../buttons/other/addrole-button.js'.runInteraction(client, interaction) }
-      const btn = client.buttons.get(interaction.customId)
+      const btn = client.buttons.get(interaction.customId.split('-')[0])
 
       if (!btn) return console.log('Le boutton n\'a pas été trouvé !')
       btn.runInteraction(client, interaction)
@@ -45,6 +45,11 @@ module.exports = {
 
       if (!selectMenu) return interaction.reply(lang.menu)
       selectMenu.runInteraction(client, interaction)
+    } else if (interaction.isModalSubmit) {
+      const modal = client.modals.get(interaction.customId.split('-')[0])
+
+      if (!modal) return interaction.reply(lang.menu)
+      modal.runInteraction(client, interaction)
     }
   }
 }

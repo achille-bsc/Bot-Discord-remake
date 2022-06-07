@@ -7,7 +7,8 @@ module.exports = {
     const haveGuild = client.getGuild(guild)
     if (!haveGuild) {
       try {
-        await client.createGuild(guild)
+        const guildCreated = await client.createGuild(guild)
+        guildCreated.save()
       } catch (err) {
         Logger.error(err)
       }

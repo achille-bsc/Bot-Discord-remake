@@ -7,5 +7,5 @@
   "monthPrice": 3.50,
   "weekPrice": 0.87,
 
-  "bot": ""
+  "bot": false
 }

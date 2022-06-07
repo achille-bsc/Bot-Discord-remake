@@ -6,8 +6,8 @@ const Logger = require('./utils/logger')
 const config = require('./config.json')
 require('colors')
 
-const X = ['commands', 'buttons', 'selects']
-const handlers = ['EventUtil', 'CommandUtil', 'ButtonUtil', 'SelectUtil']
+const X = ['commands', 'buttons', 'selects', 'modals']
+const handlers = ['EventUtil', 'CommandUtil', 'ButtonUtil', 'SelectUtil', 'ModalUtil']
 require('./utils/Functions')(client)
 
 X.forEach(x => {
@@ -49,7 +49,7 @@ mongoose.connect(process.env.DATABASE_URI, {
 })
   .catch(err => { console.log(`${err}`.bold.red) })
 
-if (config.bot === 'Bot') {
+if (config.bot) {
   client.login(process.env.YMULE)
 } else {
   client.login(process.env.TEST)
