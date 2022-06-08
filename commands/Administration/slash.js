@@ -28,6 +28,7 @@ module.exports = {
 		const guild = await client.getGuild(interaction.guild)
 		const lang = guild.langue === 'fr' ? langFr : langEn
 
+<<<<<<< HEAD
 		if (interaction.options.getSubcommand() === 'update') {
 			const guildObject = await client.guilds.cache.get(interaction.guild.id)
 			await guildObject.commands.set(client.commands.map(cmd => cmd))
@@ -41,6 +42,22 @@ module.exports = {
 			const embed = new MessageEmbed()
 				.setTitle(`${lang.falseTitle}`)
 				.setColor('RED')
+=======
+    if (interaction.options.getSubcommand() === 'update') {
+      const guildObject = await client.guilds.cache.get(interaction.guild.id)
+      interaction.deferReply()
+      await guildObject.commands.set(client.commands.map(cmd => cmd))
+      const embed = new MessageEmbed()
+        .setTitle(`${lang.trueTitle}`)
+        .setColor('GREEN')
+        .setFooter({ text: `${lang.footer} ${interaction.member.tag}`, avatarURL: `${interaction.member.displayAvatarURL(true)}` })
+      await interaction.editReply({ embeds: [embed] })
+    } else if (interaction.options.getSubcommand() === 'off') {
+      interaction.guild.commands.set([])
+      const embed = new MessageEmbed()
+        .setTitle(`${lang.falseTitle}`)
+        .setColor('RED')
+>>>>>>> 27652c02e5c049b01c6fbd3b75c66f0d6162182f
 
 			interaction.reply({ embeds: [embed], ephemeral: true })
 		}
