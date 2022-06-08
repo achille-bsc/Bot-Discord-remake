@@ -1,0 +1,7 @@
+{
+  "deleteErrorTitle": "An error occurred",
+  "deleteErrorDescription": "An error occurred while deleting the channel. It it may be because of the channel don't exit, or I dont have the necessaries permissions to delete this.",
+  "deleteSuccessTitle": "Channel deleted",
+  "deleteSuccessDescription1": "The channel",
+  "deleteSuccessDescription2": "has correctly been deleted !"
+}

@@ -2,6 +2,9 @@
   "messageTitle": "Ouvrir un ticket",
   "button": "Ouvrir un ticket",
 
+  "errTitle": "Impossible de configurer le message !",
+  "errDescription": "Vous avez déjà 2 messages permettant l'ouverture de tickets. Pour passer cette limite, vous devez passer prémium",
+
   "erreurTitle": "Erreur",
   "erreurDescription": "Une erreur est survenue lors de la sauvegarde de la configuration. Veuillez réessayer ultérieurement.\nSi le problème persiste, veuilleze contactez un administrateur."
 }

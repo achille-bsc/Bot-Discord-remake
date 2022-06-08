@@ -28,7 +28,7 @@ module.exports = {
     })
     const ticketOpenedMessageEmbed = new MessageEmbed()
       .setTitle(`${lang.buttonTicketEmbedTitle}`)
-      .setDescription(`${openMessage}`)
+      .setDescription(`${openMessage.replace('{member}', `<@${interaction.member.id}>`)}`)
       .setColor('GREEN')
       .setFooter({ text: `${interaction.member.user.tag}`, iconURL: `${interaction.member.user.displayAvatarURL({ dynamic: true })}` })
 
@@ -40,7 +40,7 @@ module.exports = {
           .setStyle('DANGER')
       )
 
-    await channel.send({ embeds: [ticketOpenedMessageEmbed], components: [row] })
+    await channel.send({ content: `${guild.activeTicketMention ? `<@${interaction.member.id}>` : ' '}`, embeds: [ticketOpenedMessageEmbed], components: [row] })
 
     interaction.reply({ content: `Votre ticket <#${channel.id}> à correctement été créé !`, ephemeral: true })
 

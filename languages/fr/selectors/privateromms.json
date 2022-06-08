@@ -1,0 +1,7 @@
+{
+  "deleteErrorTitle": "Une erreur est survenue",
+  "deleteErrorDescription": "Une erreur est survenue lors de la suppression de l'élément. Il se peut que l'élément n'existe plus, ou que je n'ia pas les permissions necessaires pour le supprimer",
+  "deleteSuccessTitle": "Salon supprimé",
+  "deleteSuccessDescription1": "Le salon",
+  "deleteSuccessDescription2": "à correctement été supprimé !"
+}
