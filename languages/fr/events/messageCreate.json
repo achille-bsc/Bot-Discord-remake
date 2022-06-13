@@ -1,10 +1,5 @@
 {
-  "trueTitle": "Les slash commands ont correctement été activés",
-  "falseTitle": "Les slash commands ont correctement été desactivés",
-
-  "cooldown": "Vous devez attendre avant de tapper un nouveau message !",
-
-
+  "trueTitle": "Les slash commandes ont correctement été activées",
   "footer": "Demandé par",
 
   "adminsOnly": "Seuls les Administrateurs du bot peuvent utiliser cette commande",

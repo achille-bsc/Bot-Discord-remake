@@ -1,6 +1,7 @@
 const { MessageEmbed } = require('discord.js')
 const config = require('../../config.json')
 
+<<<<<<< HEAD
 module.exports = {
   name: 'setpremium',
   description: 'Ajoute un serveur premium',
@@ -9,6 +10,83 @@ module.exports = {
   usage: 'setpremium <guildId>',
   examples: ['setpremium 123456789123456789'],
   category: 'botadmin',
+=======
+<<<<<<< HEAD
+module.exports = {
+	name: 'setpremium',
+	description: 'Ajoute un serveur premium',
+	permissions: ['ADMINISTRATOR'],
+	ownerOnly: true,
+	usage: 'setpremium <guildId>',
+	examples: ['setpremium 123456789123456789'],
+	category: 'botadmin',
+
+	options: [
+		{
+			name: 'guildid',
+			description: 'ID de la guild à passer premium',
+			type: 'STRING',
+			required: true
+		},
+		{
+			name: 'switch',
+			description: 'toggle',
+			type: 'BOOLEAN',
+			required: true
+		},
+		{
+			name: 'offre',
+			description: 'Offre choisi par le/la client(e)',
+			type: 'STRING',
+			required: true,
+			choices: [
+				{ name: 'week', value: 'week' },
+				{ name: 'month', value: 'month' },
+				{ name: 'sixMonths', value: 'sixmonths' },
+				{ name: 'year', value: 'year' }
+			]
+		}
+	],
+
+	async runInteraction (client, interaction) {
+		if (!config.botadmins.includes(interaction.member.id)) return interaction.reply({ content: 'Cette commande n\'est disponnible que aux administrateurs du bot', ephemeral: true })
+
+		const guildId = interaction.options.getString('guildid')
+		const offer = interaction.options.getString('offre')
+		const time = offer === 'week' ? 1000 * 60 * 60 * 24 * 7 : offer === 'month' ? 1000 * 60 * 60 * 24 * 28 : offer === 'sixmonths' ? 1000 * 60 * 60 * 24 * 30 * 6 : 1000 * 60 * 60 * 24 * 30 * 12
+		let toggle = interaction.options.getBoolean('switch')
+		if (toggle === 'true') {
+			toggle = true
+		} else if (toggle === 'false') {
+			toggle = false
+		}
+		const guild = client.guilds.cache.get(guildId)
+		const guildDb = await client.getGuild(guild)
+		if (guildDb) {
+			guildDb.premium = toggle
+			guildDb.endPremiumTimestamp = guildDb.endPremiumTimestamp + Date.now() + time
+			guildDb.activated = false
+			guildDb.save().then(() => {
+				interaction.reply({ content: `Le serveur **${guild.name}** ${toggle ? 'est maintenant premium !' : 'n\'est maintenant plus premium !'}`, ephemeral: true })
+			}).catch((err) => {
+				const erreur = new MessageEmbed()
+					.setTitle('Erreur')
+					.setDescription(`Une erreur s'est produite. Le bot n'est pas parvenu à trouver le serveur que vous tentez de mettre premium. Il est possible que le bot ne soit pas sur le serveur en qustion. Voici l'erreur:\`\`\`${err}\`\`\``)
+
+				interaction.reply({ embdes: erreur, ephemeral: true })
+			})
+		}
+	}
+=======
+// module.exports = {
+//   name: 'setpremium',
+//   description: 'Ajoute un serveur premium',
+//   permissions: ['ADMINISTRATOR'],
+//   ownerOnly: true,
+//   usage: 'setpremium <guildId>',
+//   examples: ['setpremium 123456789123456789'],
+//   category: 'botadmin',
+>>>>>>> 61309eb7478fef3ea2721e9c1f7333cc3d3f18e0
 
   options: [
     {
@@ -62,9 +140,17 @@ module.exports = {
           .setTitle('Erreur')
           .setDescription(`Une erreur s'est produite. Le bot n'est pas parvenu à trouver le serveur que vous tentez de mettre premium. Il est possible que le bot ne soit pas sur le serveur en qustion. Voici l'erreur:\`\`\`${err}\`\`\``)
 
+<<<<<<< HEAD
         interaction.reply({ embdes: erreur, ephemeral: true })
       })
     }
   }
+=======
+//         interaction.reply({ embdes: erreur, ephemeral: true })
+//       })
+//     }
+//   }
+>>>>>>> 27652c02e5c049b01c6fbd3b75c66f0d6162182f
+>>>>>>> 61309eb7478fef3ea2721e9c1f7333cc3d3f18e0
 
 }

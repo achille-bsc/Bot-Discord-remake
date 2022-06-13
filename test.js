@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const { Client, Collection } = require('discord.js')
 const dotenv = require('dotenv'); dotenv.config()
 const mongoose = require('mongoose')
@@ -10,30 +11,30 @@ const handlers = ['EventUtil', 'CommandUtil', 'ButtonUtil', 'SelectUtil', 'Modal
 require('./utils/Functions')(client)
 
 X.forEach(x => {
-  client[x] = new Collection()
+	client[x] = new Collection()
 })
 handlers.forEach(handler => {
-  require(`./utils/handlers/${handler}`)(client)
+	require(`./utils/handlers/${handler}`)(client)
 }
 )
 
 process.on('exit', code => { Logger.client(`Le precessus s'est arrêté avec le code ${code} !`) })
 process.on('uncaughtException', (err, origin) => {
-  Logger.error(`UNCAUGHT_EXCEPTION: ${err}`)
-  console.error(`Origine: ${origin}`)
+	Logger.error(`UNCAUGHT_EXCEPTION: ${err}`)
+	console.error(`Origine: ${origin}`)
 })
 process.on('unhandledRejection', (reason, promise) => {
-  Logger.warn(`UNHANDLED_REJECTION: ${reason}`)
-  console.log(promise)
+	Logger.warn(`UNHANDLED_REJECTION: ${reason}`)
+	console.log(promise)
 })
 process.on('warning', (...args) => { Logger.warn(...args) })
 
 mongoose.connect(process.env.DATABASE_URI, {
-  autoIndex: false,
-  maxPoolSize: 10,
-  serverSelectionTimeoutMS: 5000,
-  socketTimeoutMS: 45000,
-  family: 4
+	autoIndex: false,
+	maxPoolSize: 10,
+	serverSelectionTimeoutMS: 5000,
+	socketTimeoutMS: 45000,
+	family: 4
 }).then(() => {
   console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━┓'.magenta)
   console.log('┃                        ┃'.magenta)
@@ -46,9 +47,21 @@ mongoose.connect(process.env.DATABASE_URI, {
   console.log('┃                                       ┃'.yellow)
   console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.yellow)
 })
-  .catch(err => { console.log(`${err}`.bold.red) })
+	.catch(err => { console.log(`${err}`.bold.red) })
 
+<<<<<<< HEAD:test.js
 client.login(process.env.TEST)
+=======
+if (config.bot) {
+<<<<<<< HEAD
+	client.login(process.env.YMULE)
+=======
+  client.login(process.env.YMULE)
+>>>>>>> 27652c02e5c049b01c6fbd3b75c66f0d6162182f
+} else {
+	client.login(process.env.TEST)
+}
+>>>>>>> 61309eb7478fef3ea2721e9c1f7333cc3d3f18e0:index.js
 
 /// ////////////////////////////
 // Discord bot pannel handler//
