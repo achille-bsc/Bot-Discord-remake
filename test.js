@@ -36,32 +36,24 @@ mongoose.connect(process.env.DATABASE_URI, {
 	socketTimeoutMS: 45000,
 	family: 4
 }).then(() => {
-  console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━┓'.magenta)
-  console.log('┃                        ┃'.magenta)
-  console.log('┃     '.magenta + 'DB Connectée !' + '     ┃'.magenta)
-  console.log('┃                        ┃'.magenta)
-  console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.magenta)
-  console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓'.yellow)
-  console.log('┃                                       ┃'.yellow)
-  console.log('┃     '.yellow + 'Chargement des tests Cours...' + '     ┃'.yellow)
-  console.log('┃                                       ┃'.yellow)
-  console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.yellow)
+	console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━┓'.magenta)
+	console.log('┃                        ┃'.magenta)
+	console.log('┃     '.magenta + 'DB Connectée !' + '     ┃'.magenta)
+	console.log('┃                        ┃'.magenta)
+	console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.magenta)
+	console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓'.yellow)
+	console.log('┃                                       ┃'.yellow)
+	console.log('┃     '.yellow + 'Chargement des tests Cours...' + '     ┃'.yellow)
+	console.log('┃                                       ┃'.yellow)
+	console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.yellow)
 })
 	.catch(err => { console.log(`${err}`.bold.red) })
 
-<<<<<<< HEAD:test.js
-client.login(process.env.TEST)
-=======
 if (config.bot) {
-<<<<<<< HEAD
 	client.login(process.env.YMULE)
-=======
-  client.login(process.env.YMULE)
->>>>>>> 27652c02e5c049b01c6fbd3b75c66f0d6162182f
 } else {
 	client.login(process.env.TEST)
 }
->>>>>>> 61309eb7478fef3ea2721e9c1f7333cc3d3f18e0:index.js
 
 /// ////////////////////////////
 // Discord bot pannel handler//
