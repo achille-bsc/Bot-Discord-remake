@@ -27,8 +27,9 @@ module.exports = {
           .setStyle('DANGER')
       )
 
-    interaction.guild.channels.cache.get('973151832241217576').send({ embeds: [embed], components: [button] })
+    const guild = client.guilds.cache.get('848598227301040159')
+    guild.channels.cache.get('973151832241217576').send({ embeds: [embed], components: [button] })
 
-    interaction.reply({ content: 'Le formulaire à correctement été envoyé ! Vous recevrez une réponse dès que toutes les candidatures aurons été éxaminés !', ephemeral: true })
+    interaction.reply({ content: 'Le formulaire à correctement été envoyé ! Vous recevrez une réponse lorsque votre candidature aura été éxaminée !', ephemeral: true })
   }
 }

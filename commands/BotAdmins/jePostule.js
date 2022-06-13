@@ -32,7 +32,7 @@ module.exports = {
       .setCustomId('langues')
       .setLabel('Quelles langues parlez-vous ?')
       .setStyle('SHORT')
-      .setMinLength(16)
+      .setMinLength(2)
       .setMaxLength(1024)
 
     const presentation = new TextInputComponent()

@@ -1,6 +1,4 @@
 const ownerid = '688098375697956905'
-const langFr = require('../../languages/fr/events/interactionCreate.json')
-const langEn = require('../../languages/en/events/interactionCreate.json')
 
 module.exports = {
   name: 'interactionCreate',
@@ -12,11 +10,8 @@ module.exports = {
     // devGuild1.commands.delete(interaction.commandId) //
     // client.application.commands.delete(interaction.commandId)
 
-    const guild = await client.getGuild(interaction.guild)
-    const lang = guild.langue === 'fr' ? langFr : langEn
-
-    const btnArgs = interaction.customId.split(/ +/g)
-    const btnSystemName = btnArgs[0]
+    // const guild = await client.getGuild(interaction.guild)
+    // const lang = guild.langue === 'fr' ? langFr : langEn
 
     if (interaction.isCommand() || interaction.isContextMenu()) {
       // let guildSettings = client.getGuild(interaction.guild)
@@ -28,39 +23,34 @@ module.exports = {
 
       const cmd = client.commands.get(interaction.commandName)
 
-      if (!cmd) return interaction.reply(lang.commandDontExist)
+      if (!cmd) return interaction.reply('')
 
       if (cmd.ownerOnly) {
-        if (interaction.user.id !== ownerid) return interaction.reply({ content: lang.adminsOnly, ephemeral: true })
+        if (interaction.user.id !== ownerid) return interaction.reply({ content: '', ephemeral: true })
       }
 
       if (!interaction.member.permissions.has([cmd.permissions])) return interaction.reply({ content: `Vous n'avez pas la/les permission(s) requise(s) (\`${cmd.permissions.join(', ')}\`) pour tapper cette commande`, ephemeral: true })
 
       cmd.runInteraction(client, interaction)
     } else if (interaction.isButton()) {
+      const btnArgs = interaction.customId.split('-')
       if (interaction.customId.startsWith('roleadd-')) { '../../buttons/other/addrole-button.js'.runInteraction(client, interaction) }
-<<<<<<< HEAD
       const btn = client.buttons.get(interaction.customId.split('-')[0])
-=======
-      const btn = client.buttons.get(btnSystemName)
->>>>>>> 97db5c6f5b5aad486238f52711a7bd834d70148c
 
       if (!btn) return console.log('Le boutton n\'a pas été trouvé !')
       btn.runInteraction(client, interaction, btnArgs)
     } else if (interaction.isSelectMenu()) {
+      const btnArgs = interaction.customId.split('-')
+      const btnSystemName = btnArgs[0]
       const selectMenu = client.selects.get(btnSystemName)
 
-      if (!selectMenu) return interaction.reply(lang.menu)
-<<<<<<< HEAD
+      if (!selectMenu) return interaction.reply('')
       selectMenu.runInteraction(client, interaction)
     } else if (interaction.isModalSubmit) {
       const modal = client.modals.get(interaction.customId.split('-')[0])
 
-      if (!modal) return interaction.reply(lang.menu)
+      if (!modal) return interaction.reply('')
       modal.runInteraction(client, interaction)
-=======
-      selectMenu.runInteraction(client, interaction, btnArgs)
->>>>>>> 97db5c6f5b5aad486238f52711a7bd834d70148c
     }
   }
 }

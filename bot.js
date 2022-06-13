@@ -3,7 +3,6 @@ const dotenv = require('dotenv'); dotenv.config()
 const mongoose = require('mongoose')
 const client = new Client({ intents: 98303 })
 const Logger = require('./utils/logger')
-const config = require('./config.json')
 require('colors')
 
 const X = ['commands', 'buttons', 'selects', 'modals']
@@ -41,19 +40,14 @@ mongoose.connect(process.env.DATABASE_URI, {
   console.log('┃     '.magenta + 'DB Connectée !' + '     ┃'.magenta)
   console.log('┃                        ┃'.magenta)
   console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.magenta)
-  console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓'.yellow)
-  console.log('┃                                ┃'.yellow)
-  console.log('┃     '.yellow + 'Chargement en Cours...' + '     ┃'.yellow)
-  console.log('┃                                ┃'.yellow)
-  console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.yellow)
+  console.log('┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓'.yellow)
+  console.log('┃                                    ┃'.yellow)
+  console.log('┃     '.yellow + 'Chargement du bot Cours...' + '     ┃'.yellow)
+  console.log('┃                                    ┃'.yellow)
+  console.log('┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛\n'.yellow)
 })
   .catch(err => { console.log(`${err}`.bold.red) })
-
-if (config.bot) {
-  client.login(process.env.YMULE)
-} else {
-  client.login(process.env.TEST)
-}
+client.login(process.env.YMULE)
 
 /// ////////////////////////////
 // Discord bot pannel handler//

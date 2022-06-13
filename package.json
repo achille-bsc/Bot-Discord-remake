@@ -6,7 +6,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --exec 'node index'"
+    "dev": "nodemon --exec 'node test'",
+    "bot": "nodemon --exec 'node bot'"
+
   },
   "keywords": [],
   "author": "",

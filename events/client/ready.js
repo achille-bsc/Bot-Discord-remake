@@ -42,19 +42,6 @@ module.exports = {
         url: 'https://www.youtube.com/channel/UCoorq7xuhdcVe2hfRgu0_5g'
       })
 
-      client.guilds.cache.forEach(async guild => {
-        const guildDb = await client.getGuild(guild)
-        if (guildDb.premium) {
-          if (guildDb.endPremiumTimestamp <= Date.now()) {
-            guildDb.premium = false
-            guildDb.activated = false
-            guildDb.endPremiumTimestamp = 0
-            await guildDb.save()
-            console.log('Le serveur '.red + guild.name.red + ' n\'est plus premium !'.red)
-          }
-        }
-      })
-
       i = ++i % statuses.length
     }, timeInSec * 1000)
   }
