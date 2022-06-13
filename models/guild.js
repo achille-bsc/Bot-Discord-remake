@@ -15,13 +15,13 @@ const guildSchema = mongoose.Schema({
 	welcomeMessageEnabled: { type: Boolean, default: true },
 	welcomeMessage: { type: String, default: '🎉 Bienvenue **{member}** sur le serveur **{server.name}** 🎉' },
 	welcomeColor: { type: String, default: 'GREEN' },
-	welcomeChannel: { type: String, default: '973164997511352320' },
+	welcomeChannel: { type: String, default: '' },
 
 	// GOODBYE
 	goodByeMessageEnabled: { type: Boolean, default: true },
 	goodByeMessage: { type: String, default: '**{member}** viens malhereusement de nous quitter 😢' },
 	goodByeColor: { type: String, default: 'RED' },
-	goodByeChannel: { type: String, default: '973164997511352320' },
+	goodByeChannel: { type: String, default: '' },
 
 	// PRIVATEROOM
 	privateRooms: { type: Array, default: [] },
@@ -44,7 +44,10 @@ const guildSchema = mongoose.Schema({
 	ticketCategorie: { type: String, default: '' },
 	ticketsCount: { type: Number, default: 1 },
 	activeTicketMention: { type: Boolean, default: true },
-	ticketHandlers: { type: Number, default: 0 }
+	ticketHandlers: { type: Number, default: 0 },
+
+	// MEMBERCOUNT
+	memberCountChannelId: { type: String, default: '' }
 
 })
 

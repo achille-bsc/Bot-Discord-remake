@@ -27,13 +27,11 @@ module.exports = {
 
 		if (interaction.options.getSubcommand() === 'update') {
 			const guildObject = await client.guilds.cache.get(interaction.guild.id)
-			interaction.deferReply()
-			interaction.deleteReply()
 			await guildObject.commands.set(client.commands.map(cmd => cmd)).then(async () => {
 				const embed = new MessageEmbed()
 					.setTitle('Slash commandes Mises à jours')
 					.setColor('GREEN')
-				await interaction.editReply({ embeds: [embed] })
+				await interaction.reply({ embeds: [embed] })
 			})
 		} else if (interaction.options.getSubcommand() === 'off') {
 			interaction.guild.commands.set([]).then(() => {

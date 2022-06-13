@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+const config = require('./config.json')
 const { Client, Collection } = require('discord.js')
 const dotenv = require('dotenv'); dotenv.config()
 const mongoose = require('mongoose')
